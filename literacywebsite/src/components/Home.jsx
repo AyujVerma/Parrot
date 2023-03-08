@@ -15,11 +15,11 @@ return (
 		</li>
 		<li>
 		{/* Endpoint to route to About component */}
-		<Link to="/about">About</Link>
+		<Link to="/Reading">Reading</Link>
 		</li>
 		<li>
 		{/* Endpoint to route to Contact Us component */}
-		<Link to="/contactus">Contact Us</Link>
+		<Link to="/Writing">Writing</Link>
 		</li>
 	</ul>
 	</div>

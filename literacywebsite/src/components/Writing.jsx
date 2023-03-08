@@ -3,10 +3,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import TextField from '@mui/material/TextField';
   
-const About = () => {
+const Writing = () => {
   return (
-    <div>
-      <h1>Trying to embed a video</h1>
+    <container>
+        <div>
+      <h1>Writing Page</h1>
 
       <li>
 		{/* Endpoint to route to Home component */}
@@ -18,8 +19,9 @@ const About = () => {
 
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
     
-    </div>
+        </div>
+    </container>
   );
 };
   
-export default About;
+export default Writing;

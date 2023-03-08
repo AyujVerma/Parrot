@@ -10,9 +10,9 @@ import {
 // import Home component
 import Home from "./components/Home";
 // import About component
-import About from "./components/About";
+import Reading from "./components/Reading";
 // import ContactUs component
-import ContactUs from "./components/ContactUs";
+import Writing from "./components/Writing";
   
 function App() {
   return (
@@ -28,12 +28,12 @@ function App() {
           {/* This route is for about component 
           with exact path "/about", in component 
           props we passes the imported component*/}
-          <Route path="/about" component={About} />
+          <Route path="/Reading" component={Reading} />
             
           {/* This route is for contactus component
           with exact path "/contactus", in 
           component props we passes the imported component*/}
-          <Route path="/contactus" component={ContactUs} />
+          <Route path="/Writing" component={Writing} />
             
           {/* If any route mismatches the upper 
           route endpoints then, redirect triggers 
