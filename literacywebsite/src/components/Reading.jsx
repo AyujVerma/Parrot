@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Typography, CssBaseline, Button } from '@mui/material';
 import Dictaphone from '../dictaphoneSetup.js'
+import SpeechRecognition from 'react-speech-recognition';
 
 const pigStory = "This is a test. second sentence, this is a very long one just to see how it turns out? hello third! Wow this is four.";
 const chunks = pigStory.split(/(?<=[.?!])/);
@@ -24,10 +25,17 @@ class Reading extends Component {
     }
   }
 
-  getText = () => {
+  listenContinuously = () => {
+    SpeechRecognition.startListening({
+      continuous: true,
+      language: 'en-GB',
+    });
+  };
+
+  updateReadingPage = () => {
     this.handleIndex();
     this.handleText();
-    this.props.listenContinuously();
+    this.listenContinuously();
   }
 
   render() { 
@@ -49,11 +57,11 @@ class Reading extends Component {
           <Button
             style={{marginLeft: 1155, marginTop: 10}}
             variant='contained'
-            onClick = {this.getText}
+            onClick = {this.updateReadingPage}
           >Change Text!</Button>
         </div>
         <div>
-          <Dictaphone />
+          <Dictaphone listenContinuously={this.listenContinuously}/>
         </div>
       </div>
     ) ; 

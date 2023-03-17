@@ -1,52 +1,53 @@
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Button } from '@mui/material';
-import Reading from "./components/Reading.jsx";
 
-const Dictaphone = () => {
+const Dictaphone = ({listenContinuously}) => {
     const {
       transcript,
       listening,
       resetTranscript,
       browserSupportsSpeechRecognition
     } = useSpeechRecognition();
-
-    const listenContinuously = () => {
-        SpeechRecognition.startListening({
-          continuous: true,
-          language: 'en-GB',
-        });
-      };
   
     if (!browserSupportsSpeechRecognition) {
       return <span>Browser doesn't support speech recognition.</span>;
+    }
+
+    const log = () => {
+        console.log({transcript});
     }
   
     return (
       <div>
         <div style={{float:'left', maxWidth: 900, marginLeft: 95}}>
             <p 
-                style={{fontSize:30, marginBottom:200}}
+                style={{fontSize:30, marginBottom:50}}
             >{transcript}</p>
         </div>
-        <div style={{float:'right', marginRight: 140, marginTop: 250}}>
-            <p 
-                style={{marginLeft:165}}
-            >Microphone: {listening ? 'on' : 'off'}</p>
-            <Button 
-                style={{marginLeft:50}}
-                variant='contained'
-                color='success'
-                onClick={listenContinuously}
-            >Start</Button>
+        <div style={{float:'right', marginRight:140}}>
             <Button
+                style={{marginLeft:140, marginTop: 10}}
                 variant='contained'
-                onClick={SpeechRecognition.stopListening}
-            >Stop</Button>
-            <Button 
-                variant='contained'
-                color='error'
-                onClick={resetTranscript}
-            >Reset</Button>
+                onClick={log}
+            >Submit</Button>
+            <div style={{marginTop: 180}}>
+                <p 
+                >Microphone: {listening ? 'on' : 'off'}</p>
+                <Button 
+                    variant='contained'
+                    color='success'
+                    onClick={listenContinuously}
+                >Start</Button>
+                <Button
+                    variant='contained'
+                    onClick={SpeechRecognition.stopListening}
+                >Stop</Button>
+                <Button 
+                    variant='contained'
+                    color='error'
+                    onClick={resetTranscript}
+                >Reset</Button>
+            </div>
         </div>
       </div>
     );
