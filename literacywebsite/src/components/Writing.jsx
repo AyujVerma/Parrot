@@ -1,27 +1,79 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Carousel } from "react-bootstrap";
+import vid1 from "../videos/video_1.mp4";
+import vid2 from "../videos/video_2.mp4";
+import vid3 from "../videos/video_3.mp4";
+import vid4 from "../videos/video_4.mp4";
+import vid5 from "../videos/video_5.mp4";
+import vid6 from "../videos/video_6.mp4";
+import ReactPlayer from "react-player";
+import "bootstrap/dist/css/bootstrap.css"
 import TextField from '@mui/material/TextField';
   
 const Writing = () => {
+  const vidList = [
+    {
+      id: 1,
+      src: vid1,
+    },
+    {
+      id: 2,
+      src: vid2,
+    },
+    {
+      id: 3,
+      src: vid3,
+    },
+    {
+      id: 4,
+      src: vid4,
+    },
+    {
+      id: 5,
+      src: vid5,
+    },
+    {
+      id: 6,
+      src: vid6,
+    },
+  ];
+
+  
   return (
-    <container>
-        <div>
-      <h1>Writing Page</h1>
+    <div className="WritingPage">
 
-      <li>
-		{/* Endpoint to route to Home component */}
-		<Link to="/">Home</Link>
-		</li>
+      <div className="navBar">
+        <Link to="/">Home</Link>
+        <Link to="/Reading">Reading</Link>
+        <Link to="/Writing">Writing</Link>
+      </div>
 
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/MtN1YnoL46Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-     
+      <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
+        {vidList.map((vidObj) => {
+          return (
+            <Carousel.Item key={vidObj.id}>
+              <ReactPlayer
+                url={vidObj.src}
+                width="100%"
+                pip={true}
+                controls={true}
+                playing={false}
+              />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel>
 
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-    
-        </div>
-    </container>
+      <div className="textBox">
+        <TextField id="outlined-basic" label="Enter Text Here" variant="outlined" fullWidth/>
+      </div>
+
+    </div>
   );
 };
   
 export default Writing;
+
+{/* npm i react-player react-bootstrap bootstrap@5.1.3*/}

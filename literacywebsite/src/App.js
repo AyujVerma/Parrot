@@ -9,10 +9,13 @@ import {
   
 // import Home component
 import Home from "./components/Home";
-// import About component
+// import Reading component
 import Reading from "./components/Reading";
-// import ContactUs component
+// import Writing component
 import Writing from "./components/Writing";
+// import Writing component
+import NavBar from "./components/NavBar";
+  
   
 function App() {
   return (
