@@ -3,17 +3,33 @@ import { diffWords } from 'diff';
 function Diff({text1, text2}) {
   const diffs = diffWords(text1, text2);
   return (
-    <div>
-      {diffs.map((diff, i) => (
-        <span key={i} style={{backgroundColor: diff.added ? '#d4edda' : diff.removed ? '#f8d7da' : '', color: diff.added ? 'green' : diff.removed ? 'red' : ''}}>
-          {diff.value}
-        </span>
-      ))}
+    <div style={{maxWidth: '800px'}}>
+      {diffs.map((diff, i) => {
+        let backgroundColor;
+        let color;
+        let textDecoration;
+        if (diff.added) 
+        {
+          backgroundColor = '#d4edda';
+          color = 'green';
+        } else if (diff.removed) 
+        {
+          //backgroundColor = '#f8d7da';
+          color = 'red';
+          textDecoration = 'line-through';
+        }
+        return (
+          <span key={i} style={{backgroundColor, color, textDecoration}}>
+            {diff.value}
+          </span>
+        );
+      })}
     </div>
   );
 }
 
 export default Diff;
+
 
 /*
 diffWords is an array.
