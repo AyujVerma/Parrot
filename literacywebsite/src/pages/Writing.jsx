@@ -1,6 +1,5 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
 import { Carousel } from "react-bootstrap";
 import vid1 from "../videos/video_1.mp4";
 import vid2 from "../videos/video_2.mp4";
@@ -44,12 +43,6 @@ const Writing = () => {
   return (
     <div className="WritingPage">
 
-      <div className="navBar">
-        <Link to="/">Home</Link>
-        <Link to="/Reading">Reading</Link>
-        <Link to="/Writing">Writing</Link>
-      </div>
-
       <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
         {vidList.map((vidObj) => {
           return (
@@ -76,4 +69,6 @@ const Writing = () => {
   
 export default Writing;
 
-{/* npm i react-player react-bootstrap bootstrap@5.1.3*/}
+{/* npm i react-player react-bootstrap bootstrap@5.1.3 react-router-dom@6.3.0
+
+*/}
