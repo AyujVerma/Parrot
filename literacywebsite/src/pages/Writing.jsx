@@ -1,74 +1,47 @@
-
 import React from "react";
-import { Carousel } from "react-bootstrap";
-import vid1 from "../videos/video_1.mp4";
-import vid2 from "../videos/video_2.mp4";
-import vid3 from "../videos/video_3.mp4";
-import vid4 from "../videos/video_4.mp4";
-import vid5 from "../videos/video_5.mp4";
-import vid6 from "../videos/video_6.mp4";
-import ReactPlayer from "react-player";
-import "bootstrap/dist/css/bootstrap.css"
-import TextField from '@mui/material/TextField';
-  
-const Writing = () => {
-  const vidList = [
-    {
-      id: 1,
-      src: vid1,
-    },
-    {
-      id: 2,
-      src: vid2,
-    },
-    {
-      id: 3,
-      src: vid3,
-    },
-    {
-      id: 4,
-      src: vid4,
-    },
-    {
-      id: 5,
-      src: vid5,
-    },
-    {
-      id: 6,
-      src: vid6,
-    },
-  ];
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Arthur from "../images/arthur.jpg";
+import CatInTheHat from "../images/catinthehat.jpg";
+import CuriousGeorge from "../images/curiousgeorge.jpg";
+import PawPatrol from "../images/pawpatrol.jpg";
+import SofiaTheFirst from "../images/sofiathefirst.jpg";
+import WildKratts from "../images/wildkratts.jpg";
+import {Link} from 'react-router-dom';
 
-  
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  ...theme.typography.body2,
+  padding: theme.spacing(2),
+  textAlign: 'center',
+  color: theme.palette.text.secondary,
+}));
+
+export default function Writing() {
   return (
-    <div className="WritingPage">
-
-      <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
-        {vidList.map((vidObj) => {
-          return (
-            <Carousel.Item key={vidObj.id}>
-              <ReactPlayer
-                url={vidObj.src}
-                width="100%"
-                pip={true}
-                controls={true}
-                playing={false}
-              />
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
-
-      <div className="textBox">
-        <TextField id="outlined-basic" label="Enter Text Here" variant="outlined" fullWidth/>
-      </div>
-
-    </div>
+    <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><a href="./CatInTheHatVideo"> <img src={CatInTheHat}/> </a></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><img src={CuriousGeorge}/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><img src={SofiaTheFirst}/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><img src={WildKratts}/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><img src={PawPatrol}/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item><img src={Arthur}/></Item>
+          </Grid>
+      </Grid>
+    </Box>
   );
-};
-  
-export default Writing;
-
-{/* npm i react-player react-bootstrap bootstrap@5.1.3 react-router-dom@6.3.0
-
-*/}
+}

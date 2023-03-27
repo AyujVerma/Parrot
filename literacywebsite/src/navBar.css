@@ -1,0 +1,25 @@
+nav {
+    color: #000;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+}
+
+li a {
+    color:#000;
+}
+
+li a:hover {
+    color: #147228;
+}
+
+li .active {
+    background-color: rgb(154, 220, 187);
+}

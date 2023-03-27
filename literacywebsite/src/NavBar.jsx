@@ -1,13 +1,14 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
+import "./navBar.css";
 
 export default function Navbar() {
   return (
     <nav className="nav">
       <ul>
-        <CustomLink to="/">Home</CustomLink>
-        <CustomLink to="/Reading">Reading</CustomLink>
-        <CustomLink to="/Writing">Writing</CustomLink>
-        <CustomLink to="/Analytics">Analytics</CustomLink>
+        <li> <CustomLink to="/">Home</CustomLink> </li>
+        <li> <CustomLink to="/Reading">Reading</CustomLink> </li>
+        <li> <CustomLink to="/Writing">Writing</CustomLink> </li>
+        <li> <CustomLink to="/Analytics">Analytics</CustomLink> </li>
       </ul>
     </nav>
   )
@@ -19,7 +20,7 @@ function CustomLink({ to, children, ...props }) {
 
   return (
     <li className={isActive ? "active" : ""}>
-      <Link to={to} {...props}>
+      <Link to={to} style={{ textDecoration: 'none'}} {...props}>
         {children}
       </Link>
     </li>
