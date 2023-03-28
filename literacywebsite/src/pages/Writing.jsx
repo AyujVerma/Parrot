@@ -3,45 +3,61 @@ import { experimentalStyled as styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
-import Arthur from "../images/arthur.jpg";
-import CatInTheHat from "../images/catinthehat.jpg";
-import CuriousGeorge from "../images/curiousgeorge.jpg";
-import PawPatrol from "../images/pawpatrol.jpg";
-import SofiaTheFirst from "../images/sofiathefirst.jpg";
-import WildKratts from "../images/wildkratts.jpg";
-import {Link} from 'react-router-dom';
+import Arthur from "../images/arthur.JPG";
+import CatInTheHat from "../images/catinthehat.JPG";
+import CuriousGeorge from "../images/curiousgeorge.JPG";
+import MickeyMouse from "../images/mickeymouse.JPG";
+import SofiaTheFirst from "../images/sofiathefirst.JPG";
+import WildKratts from "../images/wildkratts.JPG";
+import WordGirl from "../images/wordgirl.JPG";
+import PeppaPig from "../images/peppapig.JPG";
+import MyLittlePony from "../images/mylittlepony.JPG";
+import "./menuGrid.css";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '##FFF',
+  padding: theme.spacing(3),
   textAlign: 'center',
-  color: theme.palette.text.secondary,
 }));
 
 export default function Writing() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <div className="menugrid">
+      <br></br>
+      <br></br>
+      <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><a href="./CatInTheHatVideo"> <img src={CatInTheHat}/> </a></Item>
+            <Item elevation = "0" ><a href="./CatInTheHatVideo"> <img src={CatInTheHat} width="100%"/> </a></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><img src={CuriousGeorge}/></Item>
+            <Item elevation = "0"><img src={PeppaPig} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><img src={SofiaTheFirst}/></Item>
+            <Item elevation = "0"><img src={SofiaTheFirst} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><img src={WildKratts}/></Item>
+            <Item elevation = "0"><img src={WildKratts} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><img src={PawPatrol}/></Item>
+            <Item elevation = "0"><img src={MyLittlePony} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item><img src={Arthur}/></Item>
+            <Item elevation = "0"><img src={Arthur} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={MickeyMouse} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={CuriousGeorge} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={WordGirl} width="100%"/></Item>
           </Grid>
       </Grid>
-    </Box>
+      </Box>
+      <br></br>
+      <br></br>
+    </div>
   );
 }

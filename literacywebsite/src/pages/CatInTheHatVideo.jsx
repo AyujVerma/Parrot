@@ -10,7 +10,14 @@ import vid6 from "../videos/video_6.mp4";
 import ReactPlayer from "react-player";
 import "bootstrap/dist/css/bootstrap.css"
 import TextField from '@mui/material/TextField';
-  
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import { experimentalStyled as styled } from '@mui/material/styles';
+import "./videoplayer.css";
+import { useState } from "react";
+import { useRef } from "react";
+
 const CatInTheHatVideo = () => {
   const vidList = [
     {
@@ -39,18 +46,71 @@ const CatInTheHatVideo = () => {
     },
   ];
 
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '##FFF',
+    padding: theme.spacing(0),
+    textAlign: 'center',
+  }));
   
   return (
     <div className="CatInTheHatPage">
 
-      <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
+      <br></br>
+      <br></br>
+
+      <Box sx={{ flexGrow: 1 }}>
+      <Grid container spacing={2}>
+          <Grid item xs={8}>
+            <Item elevation = "0" > <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
         {vidList.map((vidObj) => {
           return (
             <Carousel.Item key={vidObj.id}>
               <ReactPlayer
                 url={vidObj.src}
-                width="100%"
+                width='100%'
+                height='100%'
+                controls={true}
+              />
+            </Carousel.Item>
+          );
+        })}
+      </Carousel></Item>
+          </Grid>
+          <Grid item xs={4}>
+            <Item elevation = "0"> <div className="textBox">
+            <TextField
+          id="outlined-multiline-flexible"
+          multiline
+          maxRows={4} fullWidth size="large"
+        />
+      </div> 
+      <button  style={{ margin: "16px" }}>
+        Submit
+      </button>
+      </Item>
+          </Grid>
+      </Grid>
+      </Box>
+
+    </div>
+  );
+};
+
+
+  
+export default CatInTheHatVideo;
+
+{/* npm i react-player react-bootstrap bootstrap@5.1.3 react-router-dom@6.3.0
+
+<Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
+        {vidList.map((vidObj) => {
+          return (
+            <Carousel.Item key={vidObj.id}>
+              <ReactPlayer
+                url={vidObj.src}
                 pip={true}
+                width='80%'
+                height='80%'
                 controls={true}
                 playing={false}
               />
@@ -59,16 +119,11 @@ const CatInTheHatVideo = () => {
         })}
       </Carousel>
 
+      <br></br>
+      <br></br>
+
       <div className="textBox">
-        <TextField id="outlined-basic" label="Enter Text Here" variant="outlined" fullWidth/>
+        <TextField id="outlined-basic" label="Enter Text Here" variant="outlined" width="100%"/>
       </div>
-
-    </div>
-  );
-};
-  
-export default CatInTheHatVideo;
-
-{/* npm i react-player react-bootstrap bootstrap@5.1.3 react-router-dom@6.3.0
 
 */}
