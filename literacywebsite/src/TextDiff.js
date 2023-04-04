@@ -2,6 +2,8 @@ import { diffWords } from 'diff';
 import map from './Map';
 
 function Diff({ text1, text2 }) {
+  text1 = text1.replace(/[^\w\s\']|_/g, "").trim();
+  text2 = text2.replace(/[^\w\s\']|_/g, "").trim();
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   console.log(diffs);
@@ -41,7 +43,9 @@ function Diff({ text1, text2 }) {
   function handleRemovedDiff(diff) {
     let score = getScore(diff);
     totalPassageScore += score;
-    totalUserScore -= score;
+    //totalUserScore -= score; User's score shouldn't be decremented 
+    console.log(totalPassageScore);
+    console.log(totalUserScore);
     redGreenCount(diff, score);
     //addWrongWordMap(diff);
     return {
@@ -59,6 +63,8 @@ function Diff({ text1, text2 }) {
     redGreenCount(diff, score);
     totalUserScore += score;
     totalPassageScore += score;
+    console.log(totalPassageScore);
+    console.log(totalUserScore);
     return {};
   }
 
@@ -68,32 +74,37 @@ function Diff({ text1, text2 }) {
   function getScore(diff) {
     let phraseScore = 0;
     let words = diff.value.trim().split(" ");
-    if (diff.added) {
-      totalWordsUser += words.length;
-      wrongWords += words.length;
-    }
-    else if (diff.removed) {
-      totalWordsPassage += words.length;
-      wrongWords += words.length;
-    }
-    else {
-      totalWordsPassage += words.length;
-      totalWordsUser += words.length;
-      correctWords += words.length;
-    }
-    for (let i = 0; i < words.length; i++) {
-      let word = words[i];
-      if (word != "") {
+    console.log(words);
+    if (words[0] != "") {
+      if (diff.added) {
+        totalWordsUser += words.length;
+        wrongWords += words.length;
+      }
+      else if (diff.removed) {
+        totalWordsPassage += words.length;
+        wrongWords += words.length;
+      }
+      else {
+        totalWordsPassage += words.length;
+        totalWordsUser += words.length;
+        correctWords += words.length;
+      }
+
+      for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        console.log(word);
         if (map.has(word)) {
           phraseScore += map.get(word);
+          console.log(phraseScore);
         }
         else {
           phraseScore += 1;
+          console.log(phraseScore);
         }
       }
-    }
 
-    return phraseScore;
+      return phraseScore;
+    }
   }
 
   /*

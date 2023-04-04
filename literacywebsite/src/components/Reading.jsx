@@ -5,8 +5,9 @@ import Diff from '../TextDiff'
 
 const pigStory = "This is a test. second sentence, this is a very long one just to see how it turns out? hello third! Wow this is four.";
 const chunks = pigStory.split(/(?<=[.?!])/);
-const text1 = 'One day after a heavy meal';
-const text2 = 'one day after a heavy meal';
+const text1 = 'After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.';
+const text2 = 'after a while there came a mouse and it started to play on the liOn Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear the lion jumped on it and started to kill it. The mouse requested the lion to forgive it; The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.';
+//
 class Reading extends Component {
 
   state = { 
