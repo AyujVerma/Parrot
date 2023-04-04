@@ -5,8 +5,8 @@ import Diff from '../TextDiff'
 
 const pigStory = "This is a test. second sentence, this is a very long one just to see how it turns out? hello third! Wow this is four.";
 const chunks = pigStory.split(/(?<=[.?!])/);
-const text1 = 'Nathan is smelly';
-const text2 = 'Nathan is stinky';
+const text1 = 'One day after a heavy meal';
+const text2 = 'one day after a heavy meal';
 class Reading extends Component {
 
   state = { 
