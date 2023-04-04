@@ -127,7 +127,8 @@ function Diff({ text1, text2 }) {
           style = handleNormalDiff(diff);
         }
 
-        if (totalUserScore < 0) {
+        if(i == diff.length && totalUserScore < 0)
+        {
           totalUserScore = 0;
         }
 
