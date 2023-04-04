@@ -2,6 +2,9 @@ import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import "./navBar.css";
 
 export default function Navbar() {
+
+  <li><a class="active" href="#home"></a></li>
+
   return (
     <nav className="nav">
       <ul>

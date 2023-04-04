@@ -5,7 +5,8 @@ import Reading from "./pages/Reading";
 import Writing from "./pages/Writing";
 import Analytics from "./pages/Analytics";
 import {Route, Routes} from 'react-router-dom';
-import CatInTheHatVideo from "./pages/CatInTheHatVideo";
+import PeppaPigVideo from "./pages/PeppaPigVideo";
+import ReadingMenu from "./pages/ReadingMenu";
  
 /*const theme = createTheme({
   typography: {
@@ -22,10 +23,10 @@ function App() {
        <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/Reading" element={<Reading />} />
+            <Route path="/Reading" element={<ReadingMenu />} />
             <Route path="/Writing" element={<Writing />} />
             <Route path="/Analytics" element={<Analytics/>} />
-            <Route path="/CatInTheHatVideo" element={<CatInTheHatVideo/>} />
+            <Route path="/PeppaPigVideo" element={<PeppaPigVideo/>} />
           </Routes>
        </div>
     </>
