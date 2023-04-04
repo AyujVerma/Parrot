@@ -6,7 +6,6 @@ function Diff({ text1, text2 }) {
   text2 = text2.replace(/[^\w\s\']|_/g, "").trim();
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
-  console.log(diffs);
   let totalPassageScore = 0;
   let totalUserScore = 0;
   let totalWordsPassage = 0;
@@ -44,8 +43,6 @@ function Diff({ text1, text2 }) {
     let score = getScore(diff);
     totalPassageScore += score;
     //totalUserScore -= score; User's score shouldn't be decremented 
-    console.log(totalPassageScore);
-    console.log(totalUserScore);
     redGreenCount(diff, score);
     //addWrongWordMap(diff);
     return {
@@ -63,8 +60,6 @@ function Diff({ text1, text2 }) {
     redGreenCount(diff, score);
     totalUserScore += score;
     totalPassageScore += score;
-    console.log(totalPassageScore);
-    console.log(totalUserScore);
     return {};
   }
 
@@ -74,7 +69,6 @@ function Diff({ text1, text2 }) {
   function getScore(diff) {
     let phraseScore = 0;
     let words = diff.value.trim().split(" ");
-    console.log(words);
     if (words[0] != "") {
       if (diff.added) {
         totalWordsUser += words.length;
@@ -92,14 +86,11 @@ function Diff({ text1, text2 }) {
 
       for (let i = 0; i < words.length; i++) {
         let word = words[i];
-        console.log(word);
         if (map.has(word)) {
           phraseScore += map.get(word);
-          console.log(phraseScore);
         }
         else {
           phraseScore += 1;
-          console.log(phraseScore);
         }
       }
 
