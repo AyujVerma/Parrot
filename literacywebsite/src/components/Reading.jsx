@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { Typography, CssBaseline, Button } from '@mui/material';
 import Dictaphone from '../dictaphoneSetup.js'
+import Diff2 from '../TextDiff2'
 
 const pigStory = "This is a test. second sentence, this is a very long one just to see how it turns out? hello third! Wow this is four.";
 const chunks = pigStory.split(/(?<=[.?!])/);
-
+const text1 = 'Nathan is stinky';
+const text2 = 'Nathan is smelly';
 class Reading extends Component {
 
   state = { 
@@ -37,7 +39,7 @@ class Reading extends Component {
           <Typography 
             variant="h3"
             align='center'
-          >Hello Reading World </Typography>
+          >Reading </Typography>
         </div>
         <div> 
           <CssBaseline />
@@ -54,6 +56,15 @@ class Reading extends Component {
         </div>
         <div>
           <Dictaphone />
+        </div>
+        <div>
+          {text1}
+        </div>
+        <div>
+          {text2}
+        </div>
+        <div>
+          <Diff2 text1={text1} text2={text2} />
         </div>
       </div>
     ) ; 
