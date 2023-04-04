@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { Typography, CssBaseline, Button } from '@mui/material';
+import Diff from '../TextDiff.js'
 
-const pigStory = "Once upon a time there was an old Sow with three little Pigs, and as she had not enough to keep them, she sent them out to seek their fortune. The first that went off met a Man with a bundle of straw, and said to him, \"Please, Man, give me that straw to build me a house\"; which the Man did, and the little Pig built a house with it. Presently came along a Wolf, and knocked at the door, and said, \"Little Pig, little Pig, let me come in.\" To which the Pig answered, \"No, no, by the hair of my chinny chin chin.";
+const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
 const chunks = pigStory.split(/(?<=[.?!])/);
 
 const Dictaphone = () => {
+
+    const [userText, setUserText] = useState('');
+    const [correctText, setCorrectText] = useState('');
 
     const [index, setIndex] = useState(0);
     const [outputText, setOutputText] = useState('Click \'Change Text\' to begin!');
@@ -45,6 +49,11 @@ const Dictaphone = () => {
     };
 
     function updateReadingPage() {
+        // analyze user text
+        setCorrectText(outputText.replace(/[^\w\s\']|_/g, "").trim());
+        setUserText(transcript.trim());
+
+        // update displayed text, transcript, and microphone
         handleIndex();
         handleText();
         resetTranscript();
@@ -103,6 +112,15 @@ const Dictaphone = () => {
             <p 
                 style={{fontSize:30, marginBottom:50}}
             >{transcript}</p>
+            <div>
+              {correctText}
+            </div>
+            <div>
+              {userText}
+            </div>
+            <div>
+              <Diff text1={correctText} text2={userText} />
+            </div>
         </div>
         <div style={{float:'right', marginRight:140}}>
             <Button
