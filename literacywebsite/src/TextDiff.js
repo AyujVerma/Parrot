@@ -22,7 +22,7 @@ function Diff({ text1, text2 }) {
   function handleAddedDiff(diff) {
     let score = getScore(diff);
     if (redGreenCount(diff, score)) {
-      totalUserScore += 1.5 * prevScore;
+      totalUserScore += 0.5 * prevScore;
       return {
         backgroundColor: '#fedd70',
       };
