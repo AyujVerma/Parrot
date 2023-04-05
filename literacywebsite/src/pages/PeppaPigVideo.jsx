@@ -14,12 +14,13 @@ import "./videoplayer.css";
 import { useState } from "react";
 import { useRef } from "react";
 import Button from '@mui/material/Button';
+import { render } from "@testing-library/react";
 
 const PeppaPigVideo = () => {
   return (
-    <Box sx={{display: 'flex', flexDirection: 'row'}}>
-      <Video/>
-      <WritingBox/>
+    <Box className="page">
+      <div className="video"><Video/></div>
+      <div className="writing"><WritingBox/></div>
     </Box>
 
   )
@@ -40,12 +41,6 @@ const Video = () => {
       src: vid3,
     },
   ];
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '##FFF',
-    padding: theme.spacing(0),
-    textAlign: 'center',
-  }));
   
   return (
     <div className="PeppaPigPage">
@@ -53,10 +48,7 @@ const Video = () => {
       <br></br>
       <br></br>
 
-      <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2}>
-          <Grid item xs={8}>
-            <Item elevation = "0" > <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
+      <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
         {vidList.map((vidObj) => {
           return (
             <Carousel.Item key={vidObj.id}>
@@ -72,11 +64,7 @@ const Video = () => {
             </Carousel.Item>
           );
         })}
-      </Carousel></Item>
-          </Grid>
-        
-      </Grid>
-      </Box>
+      </Carousel>
 
     </div>
   );
@@ -101,8 +89,17 @@ const WritingBox = () => {
         id="outlined-multiline-flexible"
         multiline
         maxRows={4} fullWidth size="large"
+        placeholder="Listen to the video and type what you hear!"
+        variant="filled"
+        rows={17}
         value={text}
         onInput={(e) => {setText(e.target.value)}}
+        // inputProps={{style: {fontSize: 40}}} // font size of input text
+        // InputLabelProps={{style: {fontSize: 40}}} // font size of input label
+
+        sx={{
+          '.MuiInputBase-input': { fontSize: '1.5rem' },
+        }}
       />
       <Button type="submit">Submit</Button>
     </Box>

@@ -29,13 +29,13 @@ export default function Writing() {
       <Box sx={{ flexGrow: 1 }} className="box">
       <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
           <Grid item xs={2} sm={4} md={4}>
-            <Item elevation = "0" > <img src={veryhungrycaterpillar} width="100%"/></Item>
+            <Item elevation = "0" > <a href="./Dictaphone"> <img src={dontletthepigeondrivethebus} width="100%"/> </a> </Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
             <Item elevation = "0"><img src={snowyday} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item elevation = "0"><img src={runawaybunny} width="100%"/></Item>
+            <Item elevation = "0"><img src={veryhungrycaterpillar} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
             <Item elevation = "0"><img src={rainbowfish} width="100%"/></Item>
@@ -50,7 +50,7 @@ export default function Writing() {
             <Item elevation = "0"><img src={givingtree} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
-            <Item elevation = "0"><img src={dontletthepigeondrivethebus} width="100%"/></Item>
+            <Item elevation = "0"><img src={runawaybunny} width="100%"/></Item>
           </Grid>
           <Grid item xs={2} sm={4} md={4}>
             <Item elevation = "0"><img src={bfg} width="100%"/></Item>

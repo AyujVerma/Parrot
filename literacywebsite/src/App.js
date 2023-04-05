@@ -1,20 +1,13 @@
 import "./App.css";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
-import Reading from "./pages/Reading";
+import VeryHungryCaterpillar from "./pages/Dictaphone";
 import Writing from "./pages/Writing";
 import Analytics from "./pages/Analytics";
 import {Route, Routes} from 'react-router-dom';
 import PeppaPigVideo from "./pages/PeppaPigVideo";
 import ReadingMenu from "./pages/ReadingMenu";
- 
-/*const theme = createTheme({
-  typography: {
-    fontFamily: [
-      'Play', 'san-serif',
-    ].join(','),
-  },
-});*/
+import Dictaphone from "./pages/Dictaphone";
   
 function App() {
   return (
@@ -27,6 +20,7 @@ function App() {
             <Route path="/Writing" element={<Writing />} />
             <Route path="/Analytics" element={<Analytics/>} />
             <Route path="/PeppaPigVideo" element={<PeppaPigVideo/>} />
+            <Route path="/Dictaphone" element={<Dictaphone/>} />
           </Routes>
        </div>
     </>
