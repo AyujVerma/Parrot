@@ -16,6 +16,9 @@ function Diff({ text1, text2, time }) {
   let partialWords = 0;
   let prev;
   let prevScore = 0;
+  const wrongWordsMap = new Map();
+  let sortedWrongWordsArray;
+  let sortedWrongWordsString;
 
   /*
       Added words styling and scores.
@@ -121,6 +124,37 @@ function Diff({ text1, text2, time }) {
     return arr.length;
   }
 
+  function sortMap(map)
+  {
+    const arr = Array.from(map);
+    if(arr.length > 1)
+    {
+      arr.sort((a, b) => b[1] - a[1]);
+    }
+    return arr;
+  }
+
+  function wrongWordsString(arr)
+  {
+    let string = "";
+    if(arr.length == 0)
+    {
+      string = "None! Perfect! Slay!";
+    }
+    else if(arr.length == 1)
+    {
+      string += ("1. " + arr[0][0] + ", " + arr[0][1]);
+    }
+    else if(arr.length == 2)
+    {
+      string += ("1. " + arr[0][0] + ", " + arr[0][1] + "; 2. " + arr[1][0] + ", " + arr[1][1]);
+    }
+    else
+    {
+      string += ("1. " + arr[0][0] + ", " + arr[0][1] + "; 2. " + arr[1][0] + ", " + arr[1][1] + "; 3. " + arr[2][0] + ", " + arr[2][1]);
+    }
+    return string;
+  }
 
   return (
     <div>
@@ -140,8 +174,14 @@ function Diff({ text1, text2, time }) {
           style = handleNormalDiff(diff);
         }
 
-        if (i == diffs.length - 1 && totalUserScore < 0) {
-          totalUserScore = 0;
+        if (i == diffs.length - 1)
+        { 
+          sortedWrongWordsArray = sortMap(wrongWordsMap);
+          sortedWrongWordsString = wrongWordsString(sortedWrongWordsArray);
+          if(totalUserScore < 0) 
+          {
+            totalUserScore = 0;
+          }
         }
         return (
           <span key={i} style={style}>
@@ -170,6 +210,8 @@ function Diff({ text1, text2, time }) {
         Time: {time}
         <br />
         Correct Words per Minute: {Math.round((60/time) * correctWords)}
+        <br />
+        Most Wrong Words and Frequencies: {sortedWrongWordsString}
       </p>
     </div>
   );
