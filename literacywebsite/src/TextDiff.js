@@ -169,7 +169,7 @@ function Diff({ text1, text2, time }) {
         <br />
         Time: {time}
         <br />
-        
+        Correct Words per Minute: {Math.round((60/time) * correctWords)}
       </p>
     </div>
   );

@@ -1,10 +1,13 @@
 import React from "react";
+import Switch, { SwitchProps } from '@mui/material/Switch';
 
 const Analytics = () => {
 return (
-	<p>
-		Add Analytics Stuff Here
-	</p>
+	<div>
+		<Switch>
+			test
+		</Switch>
+	</div>
 );
 };
 
