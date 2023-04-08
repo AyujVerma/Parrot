@@ -1,7 +1,10 @@
 import { diffWords } from 'diff';
 import map from './Map';
 
-function Diff({ text1, text2 }) {
+function Diff({ text1, text2, time }) {
+
+  console.log(time);
+
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -163,6 +166,10 @@ function Diff({ text1, text2 }) {
         User Score: {totalUserScore}
         <br />
         Accuracy: {Math.round(100 * (totalUserScore / totalPassageScore))}%
+        <br />
+        Time: {time}
+        <br />
+        
       </p>
     </div>
   );

@@ -24,6 +24,7 @@ const Reading = () => {
     const [time, setTime] = useState(0);
     const [firstClock, startClock] = useState(false);
     const [running, setRunning] = useState(false);
+    const [finalTime, setFinalTime] = useState(0);
 
     useEffect(() => {
       let interval;
@@ -102,7 +103,8 @@ function handleText() {
           setTime(0);
 
         }
-        console.log(time/1000);
+
+        setFinalTime(time/1000);
       }
       
 
@@ -153,7 +155,7 @@ function handleText() {
         <div className='speakingBox'>{transcript}</div>
       
         <div className='resultBox'> <div> {correctText} </div>
-        <div> {userText} </div> <Diff text1={correctText} text2={userText} /> </div>
+        <div> {userText} </div> <Diff text1={correctText} text2={userText} time={finalTime}/> </div>
       
       </div>
     );
