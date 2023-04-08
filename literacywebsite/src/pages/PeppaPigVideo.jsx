@@ -7,16 +7,15 @@ import ReactPlayer from "react-player";
 import "bootstrap/dist/css/bootstrap.css"
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
-import { experimentalStyled as styled } from '@mui/material/styles';
 import "./videoplayer.css";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
-import { render } from "@testing-library/react";
+import Diff from '../TextDiff.js';
+import thumbnail from '../images/peppapigthumbnail.jpg';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 const PeppaPigVideo = () => {
+  
   return (
     <Box className="page">
       <div className="video"><Video/></div>
@@ -28,6 +27,10 @@ const PeppaPigVideo = () => {
 
 const Video = () => {
   const vidList = [
+    {
+      id: 0,
+      src: thumbnail,
+    },
     {
       id: 1,
       src: vid1,
@@ -48,35 +51,60 @@ const Video = () => {
       <br></br>
       <br></br>
 
-      <Carousel wrap = {false} interval={null} indicators={false} prevIcon="" prevLabel="">
-        {vidList.map((vidObj) => {
-          return (
-            <Carousel.Item key={vidObj.id}>
-              <ReactPlayer
-                url={vidObj.src}
-                width='100%'
-                height='100%'
-                controls={true}
-                playing={true} 
-                //loop={true} 
-                //muted={true}
-              />
-            </Carousel.Item>
-          );
-        })}
-      </Carousel>
+      <Carousel wrap={false} interval={null} indicators={false} prevIcon="" prevLabel=""  nextIcon={<ArrowForwardIcon sx={{ color: "#FF7F50", fontSize: "80px"}}/>}>
+  {vidList.map((vidObj, index) => {
+    if (index === 0) {
+      // Render an image for the first slide
+      return (
+        <Carousel.Item key={vidObj.id}>
+          <img src={vidObj.src} alt="First slide" width="100%" height="100%" />
+        </Carousel.Item>
+      );
+    } else {
+      // Render a video for all other slides
+      return (
+        <Carousel.Item key={vidObj.id}>
+          <ReactPlayer
+            url={vidObj.src}
+            width="100%"
+            height="100%"
+            controls={true}
+          />
+        </Carousel.Item>
+      );
+    }
+  })}
+</Carousel>
 
     </div>
   );
 };
 
 const WritingBox = () => {
-  const [text, setText] = useState();
+  
+  const chunks = ["It is tea time, and mummy pig has a surprise for everyone.", "Today is a day for pancakes.", "Pancakes. Delicious."];
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState(''); 
+  const [correctText, setCorrectText] = useState(chunks[index]);
+  const [userText, setUserText] = useState(text);
+ 
+  function handleIndex() {
+    setIndex(index + 1);
+  }
+
+  function handleText() {
+    if (index < chunks.length) {
+      setCorrectText(chunks[index]);
+    } 
+  }
 
   function onSubmit(event) {
     event.preventDefault();
     console.log(text);
     setText('');
+    setUserText(text);
+    setIndex(index => index + 1);
+    setCorrectText(chunks[index]);
   }
 
   return (
@@ -94,14 +122,14 @@ const WritingBox = () => {
         rows={17}
         value={text}
         onInput={(e) => {setText(e.target.value)}}
-        // inputProps={{style: {fontSize: 40}}} // font size of input text
-        // InputLabelProps={{style: {fontSize: 40}}} // font size of input label
-
         sx={{
           '.MuiInputBase-input': { fontSize: '1.5rem' },
         }}
       />
       <Button type="submit">Submit</Button>
+
+      <div className='resultBox'> <div> {correctText} </div>
+        <div> {userText} </div> <Diff text1={correctText} text2={userText} /> </div>
     </Box>
   );
 }

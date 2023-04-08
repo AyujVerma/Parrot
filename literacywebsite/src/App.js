@@ -1,13 +1,12 @@
 import "./App.css";
 import NavBar from "./NavBar";
 import Home from "./pages/Home";
-import VeryHungryCaterpillar from "./pages/Reading";
 import Writing from "./pages/Writing";
 import Analytics from "./pages/Analytics";
 import {Route, Routes} from 'react-router-dom';
 import PeppaPigVideo from "./pages/PeppaPigVideo";
-import ReadingMenu from "./pages/ReadingMenu";
-import Dictaphone from "./pages/Reading";
+import ReadingMenu from "./pages/Reading";
+import Dictaphone from "./pages/PigeonBook";
   
 function App() {
   return (

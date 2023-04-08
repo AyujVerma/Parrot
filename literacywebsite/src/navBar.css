@@ -14,16 +14,20 @@ li {
 li a {
     font-size: 20px;
     display: block;
-  color: black;
+    color: #000000;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
 }
 
 li a:hover {
-    color: #85a4c7;
+    color: #5f7fa4;
 }
 
 li .active {
     background-color: #c4dcf7;
+}
+
+li .active a{
+    color: #5f7fa4;
 }

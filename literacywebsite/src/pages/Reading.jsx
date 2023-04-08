@@ -1,160 +1,64 @@
-import { useState, useEffect } from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
-import { Typography, CssBaseline, Button } from '@mui/material';
-import Diff from '../TextDiff.js';
-import "./reading.css";
-import IconButton from '@mui/material/IconButton';
-import pigeonBanner from '../images/pigeonbanner.jpg';
+import React from "react";
+import { experimentalStyled as styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import bfg from "../images/bfg.jpg";
+import dontletthepigeondrivethebus from "../images/dontletthepigeondrivethebus.jpg";
+import givingtree from "../images/givingtree.jpg";
+import humptydumpty from "../images/humptydumpty.jpg";
+import ifyougiveamouseacookie from "../images/ifyougiveamouseacookie.jpg";
+import rainbowfish from "../images/rainbowfish.jpg";
+import runawaybunny from "../images/runawaybunny.jpg";
+import snowyday from "../images/snowyday.jpg";
+import veryhungrycaterpillar from "../images/veryhungrycaterpillar.jpg";
 
-import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
-import MicOffIcon from '@mui/icons-material/MicOff';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import FlagIcon from '@mui/icons-material/Flag';
+import "./menuGrid.css";
 
-const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
-const chunks = pigStory.split(/(?<=[.?!])/);
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '##FFF',
+  padding: theme.spacing(3),
+  textAlign: 'center',
+}));
 
-const Reading = () => {
-
-    const [userText, setUserText] = useState('');
-    const [correctText, setCorrectText] = useState('');
-
-    const [index, setIndex] = useState(0);
-    const [outputText, setOutputText] = useState('Click the flag to begin!');
-    const [time, setTime] = useState(0);
-    const [firstClock, startClock] = useState(false);
-    const [running, setRunning] = useState(false);
-
-    useEffect(() => {
-      let interval;
-      if (running) {
-        interval = setInterval(() => {
-          setTime((prevTime) => prevTime + 10);
-        }, 10);
-      } else if (!running) {
-        clearInterval(interval);
-      }
-      return () => clearInterval(interval);
-    }, [running]);
-
-    function handleIndex() {
-        setIndex(index + 1);
-    }
-
-    const [disableSubmit, setDisableSubmit] = useState(true);
-
-function undisableSubmit() {
-  setDisableSubmit(false);
-  SpeechRecognition.stopListening();
+export default function Writing() {
+  return (
+    <div className="menugrid">
+      <br></br>
+      <br></br>
+      <Box sx={{ flexGrow: 1 }} className="box">
+      <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0" > <a href="./Dictaphone"> <img src={dontletthepigeondrivethebus} width="100%"/> </a> </Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={snowyday} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={veryhungrycaterpillar} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={rainbowfish} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={ifyougiveamouseacookie} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={humptydumpty} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={givingtree} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={runawaybunny} width="100%"/></Item>
+          </Grid>
+          <Grid item xs={2} sm={4} md={4}>
+            <Item elevation = "0"><img src={bfg} width="100%"/></Item>
+          </Grid>
+      </Grid>
+      </Box>
+      <br></br>
+      <br></br>
+    </div>
+  );
 }
-
-function handleText() {
-  if (index < chunks.length) {
-    setOutputText(chunks[index]);
-  } else {
-    setOutputText('The End.');
-    undisableSubmit();
-  }
-}
-
-    function listenContinuously() {
-        SpeechRecognition.startListening({
-          continuous: true,
-          language: 'en-GB',
-        });
-    };
-
-    const [micOn, setMic] = useState(false);
-
-    function handleChange() {
-      if (micOn) {
-        listenContinuously()
-      } else {
-        SpeechRecognition.stopListening()
-      }
-
-      setMic(!micOn);
-    }
-
-    const [firstClick, completeFirstClick] = useState(false);
-
-    function updateReadingPage() {
-
-      completeFirstClick(true);
-
-        // analyze user text
-        setCorrectText(outputText.replace(/[^\w\s\']|_/g, "").trim());
-        setUserText(transcript.trim());
-
-        // update displayed text, transcript, and microphone
-        handleIndex();
-        handleText();
-        resetTranscript();
-        listenContinuously();
-
-        // control clock
-        if (!firstClock) {
-          startClock(true);
-          setRunning(true);
-        } else {
-          setTime(0);
-
-        }
-        console.log(time/1000);
-      }
-      
-
-    const {
-      transcript,
-      listening,
-      resetTranscript,
-      browserSupportsSpeechRecognition
-    } = useSpeechRecognition();
-  
-    if (!browserSupportsSpeechRecognition) {
-      return <span>Browser doesn't support speech recognition.</span>;
-    }
-
-    const log = () => {
-        console.log({transcript});
-    }
-  
-    return (
-      <div>
-        <div>
-  
-              <div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
-              <div className='readingBox'>
-                {outputText}
-              </div>
-              <br></br>
-
-            <div className='microphoneButtons'>
-            <IconButton onClick={handleChange} disabled={!disableSubmit}> {listening ? <KeyboardVoiceIcon/> : <MicOffIcon/>} </IconButton>
-            </div>
-
-            <IconButton 
-                onClick={resetTranscript} disabled={!disableSubmit}> <RestartAltIcon/> </IconButton>
-
-            <div className='submitButtons'> 
-            <IconButton
-                onClick = {updateReadingPage} disabled={!disableSubmit}> {firstClick? <ArrowForwardIosIcon/> : <FlagIcon/>} </IconButton>
-
-            <IconButton
-                onClick={log} disabled={disableSubmit}>Submit</IconButton>
-            </div>
-
-        </div>
-
-        <br></br>
-        
-        <div className='speakingBox'>{transcript}</div>
-        <div> {correctText} </div>
-        <div> {userText} </div> 
-        <div className='resultBox'> <Diff text1={correctText} text2={userText} /> </div>
-      
-      </div>
-    );
-  };
-  export default Reading;
