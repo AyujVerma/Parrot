@@ -6,12 +6,12 @@ import Grid from '@mui/material/Grid';
 import Arthur from "../images/arthur.jpg";
 import CatInTheHat from "../images/catinthehat.jpg";
 import CuriousGeorge from "../images/curiousgeorge.jpg";
-import MickeyMouse from "../images/mickeymouse.jpg";
+import MickeyMouse from "../images/mickeymouse.JPG";
 import SofiaTheFirst from "../images/sofiathefirst.jpg";
 import WildKratts from "../images/wildkratts.jpg";
-import WordGirl from "../images/wordgirl.jpg";
-import PeppaPig from "../images/peppapig.jpg";
-import MyLittlePony from "../images/mylittlepony.jpg";
+import WordGirl from "../images/wordgirl.JPG";
+import PeppaPig from "../images/peppapig.JPG";
+import MyLittlePony from "../images/mylittlepony.JPG";
 import "./menuGrid.css";
 
 const Item = styled(Paper)(({ theme }) => ({
