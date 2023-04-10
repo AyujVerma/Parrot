@@ -12,15 +12,125 @@ import { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Diff from '../TextDiff.js';
 import thumbnail from '../images/peppapigthumbnail.jpg';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
+import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
 
 const PeppaPigVideo = () => {
+
+  const pageHeader = () => {
+    return (
+      <div>
+      <Box className="videoPageHeader">
+        <h1>Peppa Pig Reading</h1>
+        <p> Test your skills! Idk what else to write here but yes add stuff!!</p>
+      </Box>
+      <div class="middle-section">
+  <br></br>
+  <div class="button-group">
+
+<PopupState variant="popover" popupId="demo-popup-menu">
+  {(popupState) => (
+    <React.Fragment>
+      <Button variant="contained" sx={{ backgroundColor: '#f6bbaa', '&:hover': { backgroundColor: '#f6bbaa' }, boxShadow: "none" }}{...bindTrigger(popupState)}>
+        Season 1
+      </Button>
+      <Menu PaperProps={{
+    elevation: 0,
+    sx: { boxShadow: 'none' },
+  }} {...bindMenu(popupState)}>
+        <MenuItem onClick={popupState.close}>Episode 1</MenuItem>
+        <MenuItem onClick={popupState.close}>Episode 2</MenuItem>
+      </Menu>
+    </React.Fragment>  
+  )}
+</PopupState>
+
+<PopupState variant="popover" popupId="demo-popup-menu">
+  {(popupState) => (
+    <React.Fragment>
+      <Button variant="contained" sx={{ backgroundColor: '#f6bbaa', '&:hover': { backgroundColor: '#f6bbaa' }, boxShadow: "none" }}{...bindTrigger(popupState)}>
+        Season 2
+      </Button>
+      <Menu PaperProps={{
+    elevation: 0,
+    sx: { boxShadow: 'none' },
+  }}{...bindMenu(popupState)}>
+        <MenuItem onClick={popupState.close}>Episode 1</MenuItem>
+        <MenuItem onClick={popupState.close}>Episode 2</MenuItem>
+      </Menu>
+    </React.Fragment>  
+  )}
+</PopupState>
+
+<PopupState variant="popover" popupId="demo-popup-menu">
+  {(popupState) => (
+    <React.Fragment>
+      <Button variant="contained" sx={{ backgroundColor: '#f6bbaa', '&:hover': { backgroundColor: '#f6bbaa' }, boxShadow: "none" }}{...bindTrigger(popupState)}>
+        Season 3
+      </Button>
+      <Menu PaperProps={{
+    elevation: 0,
+    sx: { boxShadow: 'none' },
+  }}{...bindMenu(popupState)}>
+        <MenuItem onClick={popupState.close}>Episode 1</MenuItem>
+        <MenuItem onClick={popupState.close}>Episode 2</MenuItem>
+      </Menu>
+    </React.Fragment>  
+  )}
+</PopupState>
+
+<PopupState variant="popover" popupId="demo-popup-menu">
+  {(popupState) => (
+    <React.Fragment>
+      <Button variant="contained" sx={{ backgroundColor: '#f6bbaa', '&:hover': { backgroundColor: '#f6bbaa' }, boxShadow: "none" }}{...bindTrigger(popupState)}>
+        Season 4
+      </Button>
+      <Menu PaperProps={{
+    elevation: 0,
+    sx: { boxShadow: 'none' },
+  }}{...bindMenu(popupState)}>
+        <MenuItem onClick={popupState.close}>Episode 1</MenuItem>
+        <MenuItem onClick={popupState.close}>Episode 2</MenuItem>
+      </Menu>
+    </React.Fragment>  
+  )}
+</PopupState>
+
+<PopupState variant="popover" popupId="demo-popup-menu">
+  {(popupState) => (
+    <React.Fragment>
+      <Button variant="contained" sx={{ backgroundColor: '#f6bbaa', '&:hover': { backgroundColor: '#f6bbaa' }, boxShadow: "none" }}{...bindTrigger(popupState)}>
+        Season 5
+      </Button>
+      <Menu PaperProps={{
+    elevation: 0,
+    sx: { boxShadow: 'none' },
+  }}{...bindMenu(popupState)}>
+        <MenuItem onClick={popupState.close}>Episode 1</MenuItem>
+        <MenuItem onClick={popupState.close}>Episode 2</MenuItem>
+      </Menu>
+    </React.Fragment>  
+  )}
+</PopupState>
+</div>
+</div>
+
+</div>
+      
+    )
+  }
   
   return (
+    <div>
+      {pageHeader()}
     <Box className="page">
       <div className="video"><Video/></div>
       <div className="writing"><WritingBox/></div>
     </Box>
+    </div>
 
   )
 }
@@ -51,7 +161,7 @@ const Video = () => {
       <br></br>
       <br></br>
 
-      <Carousel wrap={false} interval={null} indicators={false} prevIcon="" prevLabel=""  nextIcon={<ArrowForwardIcon sx={{ color: "#FF7F50", fontSize: "80px"}}/>}>
+      <Carousel wrap={false} interval={null} indicators={false} prevIcon="" prevLabel=""  nextIcon={<ArrowCircleRightIcon sx={{ color: "#000", fontSize: "80px"}}/>}>
   {vidList.map((vidObj, index) => {
     if (index === 0) {
       // Render an image for the first slide
@@ -64,8 +174,8 @@ const Video = () => {
       // Render a video for all other slides
       return (
         <Carousel.Item key={vidObj.id}>
-          <ReactPlayer
-            url={vidObj.src}
+          <video
+            src={vidObj.src}
             width="100%"
             height="100%"
             controls={true}
@@ -119,7 +229,7 @@ const WritingBox = () => {
         maxRows={4} fullWidth size="large"
         placeholder="Listen to the video and type what you hear!"
         variant="filled"
-        rows={17}
+        rows={20}
         value={text}
         onInput={(e) => {setText(e.target.value)}}
         sx={{

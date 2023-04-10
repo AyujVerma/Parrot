@@ -21,4 +21,34 @@
     margin-right: 0;
     padding-right: 0%;
 }
-   
+
+.videoPageHeader {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #e7f4f4;
+}
+
+.button-group button:hover {
+    box-shadow: none;
+    color: #221b19;
+  }
+
+  .middle-section {
+    padding-top: 1%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #e6e6e6;
+  }
+
+  .button-group {
+    width: 100%;
+  }
+
+  .button-group Button {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 15%;
+  }
+
+  

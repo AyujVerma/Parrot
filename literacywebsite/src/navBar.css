@@ -1,14 +1,22 @@
 
-ul {
+.ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
-    background-color: rgb(240, 247, 255);
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: #f9f9f9;
     width: 100%;
+    position: fixed;
 }
 
 li {
     float: left;
+}
+
+.nav img {
+    float: right;
+    margin-top: 0.5%;
+    margin-right: 2%;
 }
 
 li a {
@@ -16,18 +24,18 @@ li a {
     display: block;
     color: #000000;
   text-align: center;
-  padding: 14px 16px;
+  padding: 25px 16px;
   text-decoration: none;
 }
 
 li a:hover {
-    color: #5f7fa4;
+    color: #406c6c;
 }
 
-li .active {
-    background-color: #c4dcf7;
+.ul li .active {
+    background-color: #c9e2e2;
 }
 
 li .active a{
-    color: #5f7fa4;
+    color: #406c6c;
 }
