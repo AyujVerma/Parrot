@@ -6,7 +6,6 @@
     margin-bottom: 0;
     background-color: #f9f9f9;
     width: 100%;
-    position: fixed;
 }
 
 li {
@@ -26,6 +25,7 @@ li a {
   text-align: center;
   padding: 25px 16px;
   text-decoration: none;
+  width: 100px;
 }
 
 li a:hover {

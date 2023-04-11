@@ -147,6 +147,7 @@ function Diff({ text1, text2 }) {
         );
       })}
 
+{/* this is the section that actually displays all the variables */}
       <p>
         Wrong Words #: {wrongWords}
         <br />
