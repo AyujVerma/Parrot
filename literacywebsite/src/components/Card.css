@@ -1,0 +1,95 @@
+.card {
+    position: relative;
+    width: 30%;
+    height: 400px;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    border-radius: 7%;
+    transform: translateY(30%);
+    outline-color: white;
+    
+  }
+  .card-front,
+  .card-back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 7%;
+
+  }
+
+  .card-title{
+    font: Dbippo, serif;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;   
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7%;
+  animation: fade-up 1s ease-out;
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .card-front {
+    background-color: pink;
+    display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7%;
+
+  }
+  .card-back {
+    background-color: #f5d181;
+    transform: rotateY(180deg);
+    border-radius: 7%;
+    font-size: 30px;
+    font-Family: 'Century Gothic';
+
+
+  }
+  .card.flipped {
+    transform: rotateY(180deg);
+    pointer-events: none;
+    border-radius: 10%;
+    
+  }
+
+  .card-text {
+    font-size: 30px;
+    font-family: 'Century Gothic';
+    font-weight: 5px;
+    height: '100vh';
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  
+  .card-image{
+    width: 50%;
+    height: 200px;
+    outline-color: white;
+
+  }
+  .grid {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }

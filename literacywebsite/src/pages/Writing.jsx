@@ -41,7 +41,7 @@ export default function Writing() {
           <Grid item xs={2} sm={4} md={4}>
             <Item><img src={Arthur}/></Item>
           </Grid>
-      </Grid>
+      </Grid> 
     </Box>
   );
 }
