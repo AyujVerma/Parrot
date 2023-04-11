@@ -1,4 +1,5 @@
 .readingBox {
+    border: 2px solid #2f2f2f;
     background-color: rgb(240, 247, 255);
     color: rgb(69, 69, 69);
     border-radius: 25px;
@@ -11,6 +12,7 @@
 }
 
 .speakingBox {
+    border: 2px solid #2f2f2f;
     background-color: rgb(202, 210, 218);
     color: rgb(69, 69, 69);
     border-radius: 25px;
@@ -22,6 +24,7 @@
 }
 
 .resultBox {
+    border: 2px solid #2f2f2f;
     background-color: rgb(204, 222, 240);
     border-radius: 25px;
     margin-top: 2%;
@@ -42,4 +45,14 @@
     display: flex;
     flex-direction: row;
     float: right;
+}
+
+.reading_page {
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+.reading_page .banner {
+    border-radius: 25px;
+    border: 2px solid #2f2f2f;
 }

@@ -1,11 +1,46 @@
 import React from "react";
+import Header from "../components/Header.js";
+import Middle from "../components/Middle.js";
+import Mission from "../components/Mission.js";
+import Footer from "../components/Footer.js"; // import the Footer component
 
 const Home = () => {
 return (
 	<p>
-		Add Home Stuff Here
+       <Header />
+       <br></br>
+       <Mission />
+       <br></br>
+       <Middle />
+       <br></br>
+       <Footer />
 	</p>
 );
 };
 
 export default Home;
+
+// import React from 'react';
+// import Header from "../components/Header.js";
+// import Middle from "../components/Middle.js";
+// import Mission from "../components/Mission.js";
+
+// import Footer from "../components/Footer.js"; // import the Footer component
+
+// const Home = () => {
+// 	return (
+// 		<div>
+//       <Header />
+//       <br></br>
+//       <Mission />
+//       <br></br>
+//       <Middle />
+//       <br></br>
+//       <Footer />
+//     </div>
+// 	);
+  
+// }
+
+// export default Home;
+
