@@ -1,10 +1,18 @@
+.menugrid {
+    padding-top: 3%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
 .menugrid img {
     border-radius: 25px;
+    border: 2px solid #2f2f2f;
 }
 
 .menugrid img:hover {
     border-radius: 25px;
     transform:scale(1.15);
+    border: 2px solid #2f2f2f;
 }
 
 .box {
@@ -12,3 +20,33 @@
     margin-right: 0;
     width: 100%;
 }
+
+.top-section {
+    background-color: #e7f4f4;
+    text-align: center;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.button-group button:hover {
+    box-shadow: none;
+    color: #221b19;
+  }
+
+  .middle-section {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #e9e9e9;
+  }
+
+  .button-group {
+    width: 100%;
+  }
+
+  .button-group Button {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 20%;
+    border: 2px solid #2f2f2f;
+  }
