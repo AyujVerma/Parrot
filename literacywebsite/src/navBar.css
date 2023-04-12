@@ -1,25 +1,41 @@
-nav {
-    color: #000;
-}
 
-nav ul {
+.ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    background-color: #f9f9f9;
+    width: 100%;
 }
 
-nav ul li {
-    display: inline;
+li {
+    float: left;
+}
+
+.nav img {
+    float: right;
+    margin-top: 0.5%;
+    margin-right: 2%;
 }
 
 li a {
-    color:#000;
+    font-size: 20px;
+    display: block;
+    color: #000000;
+  text-align: center;
+  padding: 25px 16px;
+  text-decoration: none;
+  width: 100px;
 }
 
 li a:hover {
-    color: #147228;
+    color: #406c6c;
 }
 
-li .active {
-    background-color: rgb(154, 220, 187);
+.ul li .active {
+    background-color: #c9e2e2;
+}
+
+li .active a{
+    color: #406c6c;
 }

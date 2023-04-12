@@ -100,4 +100,8 @@ function Card2 ({ frontText, backText }) {
     );
   }
 
+<<<<<<< HEAD
 export default Middle;
+=======
+export default Middle;
+>>>>>>> 18e3f9101bd95e89263bb56bd580a944f2d6afc7
