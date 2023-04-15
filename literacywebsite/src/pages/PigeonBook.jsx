@@ -124,7 +124,7 @@ function handleText() {
     }
   
     return (
-      <div>
+      <div className='reading_page'>
         <div>
   
               <div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
