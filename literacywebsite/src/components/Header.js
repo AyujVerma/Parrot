@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import final from '../images/final.png';
+import Button from '@mui/material/Button';
+
 class Header extends Component {
     state = {
       title: "",
@@ -8,7 +10,7 @@ class Header extends Component {
       isTypingSubtitle: true,
     };
     componentDidMount() {
-      const titleText = "arrot.";
+      const titleText = "Parrot.";
       const subtitleText = "Learn to read and write!!";
       let count = 0;
       let subtitleCount = 0;
@@ -46,60 +48,58 @@ class Header extends Component {
         finalImage.style.transform = 'translateX(0%)';
         finalImage.style.opacity = 1;
       }, 200);
-      // const book = document.createElement('div');
-      // book.classList.add('book');
-      // const frontCover = document.createElement('div');
-      // frontCover.classList.add('cover', 'front');
-      // book.appendChild(frontCover);
-      // const backCover = document.createElement('div');
-      // backCover.classList.add('cover', 'back');
-      // book.appendChild(backCover);
-      // document.querySelector('header').appendChild(book);
-      // book.addEventListener('click', () => {
-      //   book.classList.add('open');
-      //   setTimeout(() => {
-      //     book.classList.remove('open');
-      //   }, 2000);
-      // });
     }
     render() {
       const { title, subtitle, isTypingTitle, isTypingSubtitle } = this.state;
       return (
-        <header style={{ backgroundColor: 'pink',
+        <header style={{backgroundImage: 'radial-gradient(circle at left, #FFFFFF, #9BD0C3)',
          height: '100vh', margin: '0', padding: '0', display: 'flex', justifyContent: 'center',
           alignItems: 'left', flexDirection: 'column', textAlign: 'left' }}>
-          <img src={final} alt="ParrotLogo" style={{ width: '80%', height: 'auto' , paddingLeft: 150, position: 'absolute', zIndex: '1', opacity: 0}} className="final-image"/>
-          <h1 style={{ margin: '0', padding: '0', paddingLeft: 550, letterSpacing: '0.1em', fontSize: 100, fontFamily: 'Didot, serif',
+          <img src={final} alt="ParrotLogo" style={{ width: '70%', height: 'auto' , paddingLeft: 150, position: 'absolute', zIndex: '1', opacity: 0}} className="final-image"/>
+          <h1 style={{ margin: '0', padding: '0', paddingBottom: 230, paddingLeft: 550, letterSpacing: '0.1em', fontSize: 100,
           fontWeight: 350, color: 'BLACK', position: 'absolute', zIndex: '2' }}>
             {isTypingTitle ? `${title}|` : title}
           </h1>
-          <h2 style={{ margin: '0', padding: '0', paddingLeft: 550, paddingTop: 145, fontSize: 30, fontWeight: 50, color: 'BLACK', fontFamily: 'Didot, sans-serif',
+          <h2 style={{ margin: '0', padding: '0', paddingBottom: 230, paddingLeft: 550, paddingTop: 145, fontSize: 30, fontWeight: 50, color: 'BLACK',
           position: 'absolute', fontStyle: 'italic', zIndex: '3' }}>
             {!isTypingTitle && isTypingSubtitle ? `${subtitle}|` : subtitle}
           </h2>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            <button style={{ marginTop: 260 , marginLeft: 80, backgroundColor: '9bd0c3', fontFamily: 'Didot, sans-serif', outlineColor: 'black'}}>
+          <div style={{ display: 'flex', justifyContent: 'left' }}>
+            <button style={{ marginTop: 210 , marginLeft: 560, backgroundColor: '9bd0c3', outlineColor: 'black'}}>
               Get Started
             </button>
-            <button style={{ marginTop: 260 , marginLeft: 50, backgroundColor: '9bd0c3', fontFamily: 'Didot, sans-serif', outlineColor: 'black'}}>
+            <button style={{ marginTop: 210 , marginLeft: 30, backgroundColor: '9bd0c3', outlineColor: 'black'}}>
               Login
             </button>
           </div>
-      <style>
-        {`
-        button {
-          background-color: #9BD0C3;
-          color: white;
-          border: none;
-          padding: 8px 12px;
-          border-radius: 4px;
-            width: 130px;
-            height: 40px;
-            paddingLeft: 100px;
-            outlineColor: 'black'
-    `}
-  </style>
-        </header>
+
+          <div style={{ display: 'flex', justifyContent: 'right', flexDirection: 'column', alignItems: 'flex-end', position: 'absolute', top: '27%', right: '7%', width: '20%', height: '70%', padding: '50px', backgroundColor: '#F1F1F1', color: 'black', borderRadius: '25px'}}>
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+
+            <h3 style={{fontSize: '35px'}}>Header Text</h3>
+            <p style={{fontSize: '20px', paddingTop: '20px'}}>Some descriptive text goes here. This could be used to describe the content below or provide additional context for the page. </p>
+            {/* <Button variant="contained" sx={{backgroundColor: '#f6bbaa', boxShadow: "none", outlineColor: '#2f2f2f', '&:hover': { backgroundColor: '#f6bbaa', boxShadow: "none" }}}>Learn More</Button> */}
+            <button style={{ marginTop: 20 , backgroundColor: '#f6bbaa'}}>
+              Learn More
+            </button>
+          </div>
+          </div>
+
+          <style>
+            {`
+            button {
+              background-color: #9BD0C3;
+              color: white;
+              border: none;
+              border: 2px solid #2f2f2f;
+              border-radius: 4px;
+              width: 130px;
+              height: 40px;
+              outlineColor: 'black';
+            }
+            `}
+          </style>
+</header>
       );
     }
   }

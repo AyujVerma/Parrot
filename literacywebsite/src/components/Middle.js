@@ -1,102 +1,115 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./Card.css";
-import Book from '../images/Book.png';
-import Video from '../images/Video.png';
-import Analyze from '../images/Analyze.png';
+import Book from '@mui/icons-material/AutoStories';
+import Video from '@mui/icons-material/OndemandVideo';
+import Analyze from '@mui/icons-material/Insights';
 
 const Middle = () => {
   return (
-    <>
-      <h2 className="card-title" style={{fontFamily: "dbippo serif", animation: "fade-up 1s"}}>
-        Title of the cards
-      </h2>
       <div className="grid">
         <Card1 />
         <Card2 />
         <Card3 />
       </div>
-    </>
   );
 };
 
-function Card1 ({ frontText, backText }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const handleMouseEnter = () => {
-    setIsFlipped(true);
-  };
-  const handleMouseLeave = () => {
-    setIsFlipped(false);
-  };
-  return (
-    <div
-      className={`card ${isFlipped ? "flipped" : ""}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="card-front">
-      <img src={Book} alt="Book" className="card-image" />
-      <br></br>
-        <p className="card-text"> Read</p>
-      </div>
-      <div className="card-back">
-        <p className="card-text"> Info about Reading </p>
-      </div>
-    </div>
-    
-  );
-}
-
-function Card2 ({ frontText, backText }) {
+function Card1({ frontText, backText }) {
     const [isFlipped, setIsFlipped] = useState(false);
-    const handleMouseEnter = () => {
-      setIsFlipped(true);
-    };
-    const handleMouseLeave = () => {
-      setIsFlipped(false);
-    };
+  
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
+        if (scrollY > 500) {
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+        } else {
+          setIsFlipped(false);
+        }
+      };
+  
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+  
     return (
-      <div
-        className={`card ${isFlipped ? "flipped" : ""}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className={`card ${isFlipped ? "flipped" : ""}`}>
         <div className="card-front">
-        <img src={Video} alt="Book" className="card-image" />
-        <br></br>
+         <Book sx={{ color: "#FFF", fontSize: "250px"}}/>
+          <br></br>
+          <p className="card-text"> Read</p>
+        </div>
+        <div className="card-back">
+          <p className="card-text"> Info about Reading </p>
+        </div>
+      </div>
+    );
+  }
+  
+  function Card2({ frontText, backText }) {
+    const [isFlipped, setIsFlipped] = useState(false);
+  
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
+        if (scrollY > 500) {
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+        } else {
+          setIsFlipped(false);
+        }
+      };
+  
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+  
+    return (
+      <div className={`card ${isFlipped ? "flipped" : ""}`}>
+        <div className="card-front">
+          <Video sx={{ color: "#FFF", fontSize: "250px"}}/>
+          <br></br>
           <p className="card-text"> Write </p>
         </div>
         <div className="card-back">
           <p className="card-text"> Info about Writing </p>
         </div>
-      </div> 
-      
+      </div>
     );
   }
-
-  function Card3 ({ frontText, backText }) {
+  
+  function Card3({ frontText, backText }) {
     const [isFlipped, setIsFlipped] = useState(false);
-    const handleMouseEnter = () => {
-      setIsFlipped(true);
-    };
-    const handleMouseLeave = () => {
-      setIsFlipped(false);
-    };
+  
+    const handleScroll = () => {
+        const scrollY = window.scrollY;
+        if (scrollY > 500) {
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+        } else {
+          setIsFlipped(false);
+        }
+      };
+  
+    useEffect(() => {
+      window.addEventListener("scroll", handleScroll);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }, []);
+  
     return (
-      <div
-        className={`card ${isFlipped ? "flipped" : ""}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className={`card ${isFlipped ? "flipped" : ""}`}>
         <div className="card-front">
-        <img src={Analyze} alt="Book" className="card-image" />
-        <br></br>
+          <Analyze sx={{ color: "#FFF", fontSize: "250px"}}/>
+          <br></br>
           <p className="card-text"> Analyze </p>
         </div>
         <div className="card-back">
           <p className="card-text"> Info about Analyze </p>
         </div>
       </div>
-      
     );
   }
 

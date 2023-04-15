@@ -1,6 +1,7 @@
 import "./App.css";
 import NavBar from "./NavBar";
 import Home from "./pages/Home.jsx";
+import Footer from "./components/Footer"
 import Writing from "./pages/Writing";
 import Analytics from "./pages/Analytics";
 import {Route, Routes} from 'react-router-dom';
@@ -22,6 +23,7 @@ function App() {
             <Route path="/PigeonBook" element={<PigeonBook/>} />
           </Routes>
        </div>
+       <Footer/>
     </>
   );
 }

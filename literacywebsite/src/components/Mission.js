@@ -1,63 +1,113 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import './Mission.css';
 
 const Mission = () => {
-  const missionRef = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.intersectionRatio > 0) {
-          missionRef.current.classList.add('expand');
-        } else {
-          missionRef.current.classList.remove('expand');
-        }
-      });
-    });
-
-    observer.observe(missionRef.current);
-
-    return () => {
-      observer.unobserve(missionRef.current);
+    const [isExpanded, setIsExpanded] = useState(false);
+  
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const elementTop = document.querySelector('.mission').getBoundingClientRect().top;
+  
+      if (elementTop - windowHeight <= -100) { // adjust the threshold to determine when to expand the section
+        setIsExpanded(true);
+      } else {
+        setIsExpanded(false);
+      }
     };
-  }, []);
-
-  return (
-    <div className="mission" ref={missionRef}>
-      <div className="mission-text">
-        <h1>Our Mission</h1>
-        <p>
-          Add info about mission statement blah blah blah.
-        </p>
+  
+    useEffect(() => {
+      window.addEventListener('scroll', handleScroll);
+  
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
+  
+    const missionStyles = {
+      height: isExpanded ? '300px' : '100px', // change height on scroll
+      overflow: 'hidden', // hide overflow content when collapsed
+      transition: 'all 1s ease', // add smooth transition on scroll
+      padding: '30px', // add some padding to make the section more visually appealing
+      background: "#9bd0c3"
+    };
+  
+    const missionTextStyles = {
+      opacity: isExpanded ? 1 : 0, // fade in/out mission text on scroll
+      transition: 'all 0.3s ease', // add smooth transition on scroll
+    };
+  
+    return (
+      <div className={'mission'} style={missionStyles}>
+        <div className="mission-text" style={missionTextStyles}>
+          <h1>Our Mission</h1>
+          <p>
+            Add info about mission statement blah blah blah.
+          </p>
+        </div>
       </div>
-    </div>
-  );
-};
-
-export default Mission;
-
-
-
-// import React, { useState, useEffect } from 'react';
-// import './Mission.css';
+    );
+  };
+  
+  export default Mission;
+  
+  
 
 // const Mission = () => {
-//   const [expanded, setExpanded] = useState(false);
-
-//   useEffect(() => {
-//     setTimeout(() => {
-//       setExpanded(true);
-//     }, 500);
-//   }, []);
 
 //   return (
-//     <div className={`mission ${expanded ? "expanded" : ""}`}>
-//       <div className="mission-content">
+//     <div className={'mission'}>
+//       <div className="mission-text">
 //         <h1>Our Mission</h1>
-//         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam bibendum felis id sem condimentum consectetur. Suspendisse aliquet vestibulum ante, in efficitur libero maximus eget. Maecenas suscipit lectus sit amet dolor pretium, ut egestas ex tincidunt. Sed sit amet enim sagittis, tincidunt purus vitae, eleifend turpis. Fusce vulputate bibendum lectus, id dictum leo aliquet at. Donec ac hendrerit justo. Praesent ullamcorper turpis a pharetra tristique. Nam vitae nunc orci. Sed vestibulum porttitor velit sed ultricies. </p>
+//         <p>
+//           Add info about mission statement blah blah blah.
+//         </p>
 //       </div>
 //     </div>
 //   );
 // };
 
 // export default Mission;
+
+// const Mission = () => {
+//   const [isExpanded, setIsExpanded] = useState(false);
+
+//   const handleMouseEnter = () => {
+//     setIsExpanded(true);
+//   };
+
+//   const handleMouseLeave = () => {
+//     setIsExpanded(false);
+//   };
+
+//   const missionStyles = {
+//     height: isExpanded ? '300px' : '100px', // change height on hover
+//     overflow: 'hidden', // hide overflow content when collapsed
+//     transition: 'all 0.3s ease', // add smooth transition on hover
+//     padding: '30px', // add some padding to make the section more visually appealing
+//   };
+
+//   const missionTextStyles = {
+//     opacity: isExpanded ? 1 : 0, // fade in/out mission text on hover
+//     transition: 'all 0.3s ease', // add smooth transition on hover
+//   };
+
+//   return (
+//     <div
+//       className={'mission'}
+//       style={missionStyles}
+//       onMouseEnter={handleMouseEnter}
+//       onMouseLeave={handleMouseLeave}
+//     >
+//       <div className="mission-text" style={missionTextStyles}>
+//         <h1>Our Mission</h1>
+//         <p>
+//           Add info about mission statement blah blah blah.
+//         </p>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Mission;
+
