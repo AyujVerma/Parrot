@@ -8,36 +8,31 @@
     position: relative;
   }
   
-  /* .mission::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 0;
-    height: 100%;
-    background-color: #9bd0c3;
-    transition: width 0.5s ease-out;
-    transform: translateX(-50%);
-    z-index: -1;
-  }
-  
-  .mission.expand::before {
-    width: 110%;
-  } */
-  
   .mission-text {
     /* z-index: 1; */
     text-align: center;
     color: white;
+    margin-left: 5%;
+    /* padding-right: 30%; */
     /* font-family: 'Didot, serif'; */
   }
   
   .mission-text h1 {
-    font-size: 50px;
+    text-align: left;
+    font-size: 80px;
+    margin-left: 5%;
     margin-bottom: 20px;
+    color: #406c6c;
   }
+
+
   
   .mission-text p {
-    font-size: 20px;
+    font-size: 28px;
+  }
+
+  .mission img {
+    padding-left: 10%;
+    margin-right: 5%;
   }
   

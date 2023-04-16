@@ -26,7 +26,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
     text-align: center;
-    background-color: #e7f4f4;
+    background-color: #bbdbdb;
 }
 
 .button-group button:hover {
@@ -34,11 +34,11 @@
     color: #221b19;
   }
 
-  .middle-section {
+  .middlesection {
     padding-top: 1%;
     padding-bottom: 2%;
     text-align: center;
-    background-color: #e6e6e6;
+    background-color: #e7e7e7;
   }
 
   .button-group {

@@ -1,6 +1,6 @@
 import { Link, useMatch, useResolvedPath } from "react-router-dom"
 import "./navBar.css";
-import logo from "./images/logo.png";
+import logo from "./images/otherlogo.png";
 
 export default function Navbar() {
 
@@ -10,9 +10,9 @@ export default function Navbar() {
     <nav className="nav">
       <ul className="ul">
         <li> <CustomLink to="/">Home</CustomLink> </li>
-        <li> <CustomLink to="/Reading">Reading</CustomLink> </li>
-        <li> <CustomLink to="/Writing">Writing</CustomLink> </li>
-        <li> <CustomLink to="/Analytics">Analytics</CustomLink> </li>
+        <li> <CustomLink to="/Reading">Read</CustomLink> </li>
+        <li> <CustomLink to="/Writing">Write</CustomLink> </li>
+        <li> <CustomLink to="/Analytics">Analyze</CustomLink> </li>
         <img src={logo} width="15%" height="auto"/>
       </ul>
     </nav>
