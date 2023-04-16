@@ -26,7 +26,6 @@ const PeppaPigVideo = () => {
         <p> Test your skills! Idk what else to write here but yes add stuff!!</p>
       </Box>
       <div class="middlesection">
-      <div class="middlesection">
   <br></br>
   <div class="button-group">
 <PopupState variant="popover" popupId="demo-popup-menu">
@@ -180,17 +179,6 @@ const WritingBox = () => {
   const [text, setText] = useState('');
   const [correctText, setCorrectText] = useState(chunks[index]);
   const [userText, setUserText] = useState(text);
- 
-  function handleIndex() {
-    setIndex(index + 1);
-  }
-
-  function handleText() {
-    if (index < chunks.length) {
-      setCorrectText(chunks[index]);
-    } 
-  }
-
   function onSubmit(event) {
     event.preventDefault();
     console.log(text);
