@@ -150,9 +150,11 @@ function handleText() {
   
     return (
       <div>
+
+<div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
+<div className='reading-page'>
         <div>
-  
-              <div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
+
               <div className='readingBox'>
                 {outputText}
               </div>
@@ -177,7 +179,7 @@ function handleText() {
         <div className='speakingBox'>{transcript}</div>
       
         <div className='resultBox'> <div> {readingFlag? "" : memoizedElement} </div></div>
-      
+        </div>
       </div>
     );
   };
