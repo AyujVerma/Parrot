@@ -122,10 +122,10 @@ function handleText() {
     }
   
     return (
-      <div className='reading_page'>
+      <div>
+        <div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
+        <div className='reading_page'>
         <div>
-  
-              <div className="banner"> <img src={pigeonBanner} width="100%"/> </div>
               <div className='readingBox'>
                 {outputText}
               </div>
@@ -154,7 +154,7 @@ function handleText() {
       
         <div className='resultBox'> <div> {correctText} </div>
         <div> {userText} </div> <Diff text1={correctText} text2={userText} /> </div>
-      
+        </div>
       </div>
     );
   };

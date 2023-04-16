@@ -1,7 +1,4 @@
-.reading_page {
-    padding-top: 3%;
-    padding-bottom: 3%;
-}
+
 .readingBox {
     border: 2px solid #747474;
     background-color: #d3e6e6;
@@ -54,13 +51,16 @@
 .reading_page {
     margin-left: 5%;
     margin-right: 5%;
+    padding-bottom: 3%;
 }
 
-.reading_page .banner {
+/* .reading_page .banner {
     border-radius: 25px;
     border: 2px solid #747474;
-}
+} */
 
 .banner img{
-    border-radius: 25px;
+    /* border-radius: 25px; */
+    margin: 0 !important;
+    width: 100%;
 }

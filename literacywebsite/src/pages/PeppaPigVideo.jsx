@@ -197,16 +197,6 @@ const WritingBox = () => {
   const [text, setText] = useState(''); 
   const [correctText, setCorrectText] = useState(chunks[index]);
   const [userText, setUserText] = useState(text);
- 
-  function handleIndex() {
-    setIndex(index + 1);
-  }
-
-  function handleText() {
-    if (index < chunks.length) {
-      setCorrectText(chunks[index]);
-    } 
-  }
 
   function onSubmit(event) {
     event.preventDefault();
