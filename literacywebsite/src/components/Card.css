@@ -4,7 +4,6 @@
   height: 400px;
   transition: transform 3s;
   transform-style: preserve-3d;
-  border-radius: 25px;
 }
 
 .card-front,
@@ -15,35 +14,46 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
+  border: 2px solid #747474;
 }
 
 .card-front {
-  /* background-color: #f6bbaa; */
+  background-color: #f6bbaa;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  border-radius: 25px;
 }
 
 .card-back {
-  /* background-color: #f8dfab; */
+  background-color: #ffc9bf;
   transform: rotateY(180deg);
   font-size: 30px;
+  border-radius: 25px;
 }
 
 .card.flipped {
   transform: rotateY(180deg);
-  /* border-radius: 25px; */
+  border-radius: 25px;
+}
+
+.card.notFlipped {
+  border-radius: 25px;
 }
 
 .card-text {
-  font-size: 30px;
+  font-size: 27px;
   font-weight: 5px;
   height: '100vh';
-  color: rgb(255, 6, 6);
+  color: rgb(255, 255, 255);
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5%;
 }
 
 .grid {
@@ -55,4 +65,5 @@
   padding-bottom: 40px;
   width: 90%;
   justify-content: space-between;
+  border-radius: 25px;
 }

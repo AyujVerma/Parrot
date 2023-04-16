@@ -76,8 +76,8 @@ class Header extends Component {
           <div style={{ display: 'flex', justifyContent: 'right', flexDirection: 'column', alignItems: 'flex-end', position: 'absolute', top: '27%', right: '7%', width: '20%', height: '70%', padding: '50px', backgroundColor: '#F1F1F1', color: 'black', borderRadius: '25px'}}>
             <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 
-            <h3 style={{fontSize: '35px'}}>Header Text</h3>
-            <p style={{fontSize: '20px', paddingTop: '20px'}}>Some descriptive text goes here. This could be used to describe the content below or provide additional context for the page. </p>
+            <h3 style={{fontSize: '35px'}}>Why Parrot?</h3>
+            <p style={{fontSize: '20px', paddingTop: '20px'}}>Who said reading had to be boring? Parrot combines popular video and text content with data analytics to create fun, interactive lessons on reading and writing for kids 5-10. </p>
             {/* <Button variant="contained" sx={{backgroundColor: '#f6bbaa', boxShadow: "none", outlineColor: '#2f2f2f', '&:hover': { backgroundColor: '#f6bbaa', boxShadow: "none" }}}>Learn More</Button> */}
             <button style={{ marginTop: 20 , backgroundColor: '#f6bbaa'}}>
               Learn More

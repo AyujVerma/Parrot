@@ -1,8 +1,8 @@
 import React, { useState, useEffect} from "react";
 import "./Card.css";
-import Book from '@mui/icons-material/AutoStories';
-import Video from '@mui/icons-material/OndemandVideo';
-import Analyze from '@mui/icons-material/Insights';
+import Book from '../images/reading.png';
+import Video from '../images/writing.png';
+import Analyze from '../images/analytics.png';
 
 const Middle = () => {
   return (
@@ -20,7 +20,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
@@ -34,14 +34,16 @@ function Card1({ frontText, backText }) {
     }, []);
   
     return (
-      <div className={`card ${isFlipped ? "flipped" : ""}`}>
+      <div className={`card ${isFlipped ? "flipped" : "notFlipped"}`}>
         <div className="card-front">
-         <Book sx={{ color: "#FFF", fontSize: "250px"}}/>
-          <br></br>
-          <p className="card-text"> Read</p>
+        <img src={Book} width='300px'/>
+          <p style={{color: '#A25A44', fontSize: '35px'}}> Read</p>
         </div>
         <div className="card-back">
-          <p className="card-text"> Info about Reading </p>
+        <div className="card-text"> 
+            <p style={{color: '#A25A44', fontSize: '35px'}}>Reading</p>
+            <p>Talk along to your favorite shows and movies! Walk through a video and get real-time feedback on speech fluency, grammar, and accuracy.</p>
+         </div>
         </div>
       </div>
     );
@@ -53,7 +55,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
@@ -67,14 +69,17 @@ function Card1({ frontText, backText }) {
     }, []);
   
     return (
-      <div className={`card ${isFlipped ? "flipped" : ""}`}>
+      <div className={`card ${isFlipped ? "flipped" : "notFlipped"}`}>
         <div className="card-front">
-          <Video sx={{ color: "#FFF", fontSize: "250px"}}/>
-          <br></br>
-          <p className="card-text"> Write </p>
+        <img src={Video} width='300px'/>
+          <p style={{color: '#A25A44', fontSize: '35px'}}> Write </p>
         </div>
+        
         <div className="card-back">
-          <p className="card-text"> Info about Writing </p>
+        <div className="card-text"> 
+            <p style={{color: '#A25A44', fontSize: '35px'}}>Writing</p>
+            <p>Type along to your favorite shows and movies! Walk through a video and get real-time feedback on spelling, grammar, and vocabulary.</p>
+         </div>
         </div>
       </div>
     );
@@ -86,7 +91,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
@@ -100,14 +105,16 @@ function Card1({ frontText, backText }) {
     }, []);
   
     return (
-      <div className={`card ${isFlipped ? "flipped" : ""}`}>
+      <div className={`card ${isFlipped ? "flipped" : "notFlipped"}`}>
         <div className="card-front">
-          <Analyze sx={{ color: "#FFF", fontSize: "250px"}}/>
-          <br></br>
-          <p className="card-text"> Analyze </p>
+          <img src={Analyze} width='300px'/>
+          <p style={{color: '#A25A44', fontSize: '35px'}}> Analyze </p>
         </div>
         <div className="card-back">
-          <p className="card-text"> Info about Analyze </p>
+          <div className="card-text"> 
+            <p style={{color: '#A25A44', fontSize: '35px'}}>Analytics</p>
+            <p>Track and review your performance over time in both reading and writing. Get specific feedback to help you improve!</p>
+         </div>
         </div>
       </div>
     );

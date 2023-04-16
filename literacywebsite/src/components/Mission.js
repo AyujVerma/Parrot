@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import './Mission.css';
+import children from '../images/children.png'
 
 const Mission = () => {
     const [isExpanded, setIsExpanded] = useState(false);
@@ -25,7 +26,7 @@ const Mission = () => {
     }, []);
   
     const missionStyles = {
-      height: isExpanded ? '300px' : '100px', // change height on scroll
+      height: isExpanded ? '450px' : '100px', // change height on scroll
       overflow: 'hidden', // hide overflow content when collapsed
       transition: 'all 1s ease', // add smooth transition on scroll
       padding: '30px', // add some padding to make the section more visually appealing
@@ -39,12 +40,16 @@ const Mission = () => {
   
     return (
       <div className={'mission'} style={missionStyles}>
-        <div className="mission-text" style={missionTextStyles}>
-          <h1>Our Mission</h1>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+        <div className="mission-text">
+          <h1>Parrot's Mission</h1>
           <p>
-            Add info about mission statement blah blah blah.
+          Parrot integrates modern <span style={{color: '#406c6c'}}>streaming</span> and <span style={{color: '#406c6c'}}>e-reading</span> with education to create content for kids to learn using their favorite videos and books. <span style={{fontsize: '60px', color: '#406c6c'}}>It’s learning, the fun way.</span>
           </p>
         </div>
+        {/* this is the right side image */}
+        <img src={children} height='300px'/>
+      </div>
       </div>
     );
   };

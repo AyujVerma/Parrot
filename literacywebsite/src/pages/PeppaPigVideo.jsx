@@ -27,7 +27,7 @@ const PeppaPigVideo = () => {
         <h1>Peppa Pig Reading</h1>
         <p> Test your skills! Idk what else to write here but yes add stuff!!</p>
       </Box>
-      <div class="middle-section">
+      <div class="middlesection">
   <br></br>
   <div class="button-group">
 
