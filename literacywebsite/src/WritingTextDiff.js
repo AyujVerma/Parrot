@@ -1,8 +1,7 @@
-import { React, memo, useState } from "react";
 import { diffWords } from 'diff';
 import map from './Map';
 
-function Diff({ text1, text2, addToMap, secondClick, time }) {
+function WritingDiff({ text1, text2 }) {
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -14,9 +13,6 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
   let partialWords = 0;
   let prev;
   let prevScore = 0;
-  let sortedWrongWordsArray;
-  let sortedWrongWordsString;
-  let wrongWordsMap = new Map();
 
   /*
       Added words styling and scores.
@@ -86,19 +82,7 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
       }
 
       for (let i = 0; i < words.length; i++) {
-        let word = words[i].toLowerCase();
-        if(diff.removed)
-        {
-          if(wrongWordsMap.has(word))
-          {
-            let freq = wrongWordsMap.get(word);
-            wrongWordsMap.set(word, freq + 1);
-          }
-          else
-          {
-            wrongWordsMap.set(word, 1);
-          }
-        }
+        let word = words[i];
         if (map.has(word)) {
           phraseScore += map.get(word);
         }
@@ -106,7 +90,6 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
           phraseScore += 1;
         }
       }
-
     }
 
     return phraseScore;
@@ -135,37 +118,6 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     return arr.length;
   }
 
-  function sortMap(map)
-  {
-    const arr = Array.from(map);
-    if(arr.length > 1)
-    {
-      arr.sort((a, b) => b[1] - a[1]);
-    }
-    return arr;
-  }
-
-  function wrongWordsString(arr)
-  {
-    let string = "";
-    if(arr.length == 0)
-    {
-      string = "Perfect!";
-    }
-    else if(arr.length == 1)
-    {
-      string += ("1. " + arr[0][0] + ", " + arr[0][1]);
-    }
-    else if(arr.length == 2)
-    {
-      string += ("1. " + arr[0][0] + ", " + arr[0][1] + "; 2. " + arr[1][0] + ", " + arr[1][1]);
-    }
-    else
-    {
-      string += ("1. " + arr[0][0] + ", " + arr[0][1] + "; 2. " + arr[1][0] + ", " + arr[1][1] + "; 3. " + arr[2][0] + ", " + arr[2][1]);
-    }
-    return string;
-  }
 
   return (
     <div>
@@ -185,23 +137,9 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
           style = handleNormalDiff(diff);
         }
 
-        if (i == diffs.length - 1)
-        { 
-          sortedWrongWordsArray = sortMap(wrongWordsMap);
-          sortedWrongWordsString = wrongWordsString(sortedWrongWordsArray);
-          if(totalUserScore < 0) 
-          {
-            totalUserScore = 0;
-          }
-          if (!secondClick) {
-            addToMap(wrongWordsMap);
-            // put into database here
-            console.log("PUT INTO DATABASE");
-            console.log("Accuracy" + Math.round(100 * (totalUserScore / totalPassageScore)));
-            console.log("Correct Words per Min " + Math.round((60 / time) * correctWords));
-          }
+        if (i == diffs.length - 1 && totalUserScore < 0) {
+          totalUserScore = 0;
         }
-
         return (
           <span key={i} style={style}>
             {diff.value}
@@ -225,11 +163,9 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
         User Score: {totalUserScore}
         <br />
         Accuracy: {Math.round(100 * (totalUserScore / totalPassageScore))}%
-        <br />
-        Most Wrong Words and Frequencies: {sortedWrongWordsString}
       </p> */}
     </div>
   );
 }
 
-export default Diff;
+export default WritingDiff;

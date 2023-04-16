@@ -1,0 +1,43 @@
+.mission {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* .mission::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background-color: #9bd0c3;
+    transition: width 0.5s ease-out;
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+  
+  .mission.expand::before {
+    width: 110%;
+  } */
+  
+  .mission-text {
+    /* z-index: 1; */
+    text-align: center;
+    color: white;
+    /* font-family: 'Didot, serif'; */
+  }
+  
+  .mission-text h1 {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .mission-text p {
+    font-size: 20px;
+  }
+  

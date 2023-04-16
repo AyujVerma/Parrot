@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import Diff from '../TextDiff.js';
 import "./reading.css";
@@ -11,19 +11,29 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FlagIcon from '@mui/icons-material/Flag';
 
-const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
+const pigStory = "Red. green. Test. red. green. red. red.";
+//const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
 const chunks = pigStory.split(/(?<=[.?!])/);
 
 const Reading = () => {
-
     const [userText, setUserText] = useState('');
     const [correctText, setCorrectText] = useState('');
 
     const [index, setIndex] = useState(0);
-    const [outputText, setOutputText] = useState('Click the flag to begin!');
+    const [outputText, setOutputText] = useState('Click the arrow to begin!');
     const [time, setTime] = useState(0);
-    const [firstClock, startClock] = useState(false);
     const [running, setRunning] = useState(false);
+    const [firstClick, completeFirstClick] = useState(true);
+    const [secondClick, completeSecondClick] = useState(true);
+    const [finishedFlag, setFinishedFlag] = useState(false);
+
+    const [wrongWordsMap, setWrongWordsMap] = useState(new Map());
+
+    const [diffFlag, setDiffFlag] = useState(false);
+    const [readingFlag, setReadingFlag] = useState(false);
+    const memoizedElement = useMemo(() => {
+      return <Diff text1={correctText} text2={userText} wrongWordsMap={wrongWordsMap} addToMap={addToMap} secondClick={secondClick} time={time/1000}/>;
+    }, [diffFlag]);
 
     useEffect(() => {
       let interval;
@@ -43,6 +53,19 @@ const Reading = () => {
 
     const [disableSubmit, setDisableSubmit] = useState(true);
 
+function addToMap(tempMap) {
+  for (let [word, frequency] of tempMap) {
+    if(wrongWordsMap.has(word))
+          {
+            setWrongWordsMap(wrongWordsMap => new Map(wrongWordsMap.set(word, wrongWordsMap.get(word) + frequency)));
+          }
+          else
+          {
+            setWrongWordsMap(wrongWordsMap => new Map(wrongWordsMap.set(word, frequency)));
+          }
+  }
+}
+
 function undisableSubmit() {
   setDisableSubmit(false);
   SpeechRecognition.stopListening();
@@ -52,8 +75,9 @@ function handleText() {
   if (index < chunks.length) {
     setOutputText(chunks[index]);
   } else {
+    setFinishedFlag(true);
     setOutputText('The End.');
-    undisableSubmit();
+    console.log(wrongWordsMap);
   }
 }
 
@@ -78,31 +102,38 @@ function handleText() {
       setMic(!micOn);
     }
 
-    const [firstClick, completeFirstClick] = useState(false);
-
     function updateReadingPage() {
+        if (finishedFlag) {
+          undisableSubmit();
+          return;
+        }
 
-      completeFirstClick(true);
+
+        if (!firstClick) {
+          completeSecondClick(false);
+        }
+
+        completeFirstClick(false);
 
         // analyze user text
         setCorrectText(outputText.replace(/[^\w\s\']|_/g, "").trim());
         setUserText(transcript.trim());
 
-        // update displayed text, transcript, and microphone
-        handleIndex();
-        handleText();
-        resetTranscript();
-        listenContinuously();
-
-        // control clock
-        if (!firstClock) {
-          startClock(true);
-          setRunning(true);
-        } else {
+        // update displayed text, transcript, and microphone after next arrow is clicked
+        if (!readingFlag) {
           setTime(0);
-
+          handleIndex();
+          handleText();
+          resetTranscript();
+          listenContinuously();
+  
+          setRunning(true);
+        } else { // when submit button is clicked
+          setDiffFlag(!diffFlag);
+          SpeechRecognition.stopListening();
+          setRunning(false);
         }
-        console.log(time/1000);
+        setReadingFlag(!readingFlag);
       }
       
 
@@ -115,10 +146,6 @@ function handleText() {
   
     if (!browserSupportsSpeechRecognition) {
       return <span>Browser doesn't support speech recognition.</span>;
-    }
-
-    const log = () => {
-        console.log({transcript});
     }
   
     return (
@@ -140,10 +167,7 @@ function handleText() {
 
             <div className='submitButtons'> 
             <IconButton
-                onClick = {updateReadingPage} disabled={!disableSubmit}> {firstClick? <ArrowForwardIosIcon/> : <FlagIcon/>} </IconButton>
-
-            <IconButton
-                onClick={log} disabled={disableSubmit}>Submit</IconButton>
+                onClick = {updateReadingPage} disabled={!disableSubmit}> {finishedFlag? "Finished" : readingFlag? "Submit" : <ArrowForwardIosIcon/>} </IconButton>
             </div>
 
         </div>
@@ -152,8 +176,7 @@ function handleText() {
         
         <div className='speakingBox'>{transcript}</div>
       
-        <div className='resultBox'> <div> {correctText} </div>
-        <div> {userText} </div> <Diff text1={correctText} text2={userText} /> </div>
+        <div className='resultBox'> <div> {readingFlag? "" : memoizedElement} </div></div>
       
       </div>
     );

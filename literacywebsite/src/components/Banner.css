@@ -1,0 +1,7 @@
+.Banner{
+    background-image: cover;
+    background-size: 50vh;
+    background-repeat: no-repeat;
+    background-image: url(../images/parrot.jpg);
+   background-position: center center;
+}
