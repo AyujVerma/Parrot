@@ -1,6 +1,7 @@
 import { React, memo, useState } from "react";
 import { diffWords } from 'diff';
 import map from './Map';
+import { getDatabase, set } from "firebase/database";
 
 function Diff({ text1, text2, addToMap, secondClick, time }) {
   const options = { ignoreCase: true };
@@ -18,6 +19,31 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
   let sortedWrongWordsString;
   let wrongWordsMap = new Map();
 
+  const [accuracy, setAccuracy] = useState(0);
+  const [DBAccuracy, setDBAccuracy] = useState(0);
+  const [wordsPerMin, setWordsPerMin] = useState(0);
+  const [DBWords, setDBWords] = useState(0);
+
+
+  function readToDb() {
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, 'user/accuracy')).then((snapshot) => {
+      if(snapshot.exists()) {
+        setDBAccuracy(snapshot.val());
+      } else {
+        console.log(No)
+      }
+    })
+  }
+
+  function writeToDb() {
+    const db = getDatabase();
+
+    set(ref(db, 'user/'), {
+
+    })
+  }
+
   /*
       Added words styling and scores.
   */
@@ -33,8 +59,8 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     else {
       totalUserScore -= (1 / totalWordsPassage) * score;
       return {
-        backgroundColor: '#d4edda',
-        color: 'green',
+        backgroundColor: '#9bd0c3',
+        color: '#406c6c',
       };
     }
   }
@@ -50,7 +76,7 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: 'red',
+      color: "#F6BBA",
       textDecoration: 'line-through',
     };
   }
@@ -196,9 +222,13 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
           if (!secondClick) {
             addToMap(wrongWordsMap);
             // put into database here
+            setAccuracy(Math.round(100 * (totalUserScore / totalPassageScore)));
+            setWordsPerMin(Math.round((60 / time) * correctWords));
             console.log("PUT INTO DATABASE");
-            console.log("Accuracy" + Math.round(100 * (totalUserScore / totalPassageScore)));
-            console.log("Correct Words per Min " + Math.round((60 / time) * correctWords));
+            console.log("Accuracy" + accuracy);
+            console.log("Correct Words per Min " + wordsPerMin);
+
+
           }
         }
 
