@@ -17,6 +17,8 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
   let sortedWrongWordsArray;
   let sortedWrongWordsString;
   let wrongWordsMap = new Map();
+  const [accuracy, setAccuracy] = new useState(0);
+  const [wordsPerMin, setWordsPerMin] = new useState(0);
 
   /*
       Added words styling and scores.
@@ -197,8 +199,8 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
             addToMap(wrongWordsMap);
             // put into database here
             console.log("PUT INTO DATABASE");
-            console.log("Accuracy" + Math.round(100 * (totalUserScore / totalPassageScore)));
-            console.log("Correct Words per Min " + Math.round((60 / time) * correctWords));
+            setAccuracy(Math.round(100 * (totalUserScore / totalPassageScore)));
+            setWordsPerMin(Math.round((60 / time) * correctWords));
           }
         }
 
