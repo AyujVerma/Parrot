@@ -1,9 +1,10 @@
 import { React, memo, useState } from "react";
 import { diffWords } from 'diff';
 import map from './Map';
-import { getDatabase, set } from "firebase/database";
+import { getDatabase, set, ref, child, get } from "firebase/database";
 
 function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }) {
+  console.log("REFRESH DIFFFFFF");
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -19,17 +20,25 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
   let sortedWrongWordsString;
   let wrongWordsMap = new Map();
 
-  const [accuracy, setAccuracy] = useState(0);
-  const [DBAccuracy, setDBAccuracy] = useState(0);
-  const [wordsPerMin, setWordsPerMin] = useState(0);
-  const [DBWords, setDBWords] = useState(0);
+  // const [accuracy, setAccuracy] = useState(0);
+  // const [DBAccuracy, setDBAccuracy] = useState(0);
+  // const [wordsPerMin, setWordsPerMin] = useState(0);
+  // const [DBWords, setDBWords] = useState(0);
+
+  var accuracy = 0;
+  var wordsPerMin = 0;
+  var DBAccuracy = 0;
+  var DBWords = 0;
 
 
   function readToDb() {
+    console.log("CALL READ TO DB");
     const dbRef = ref(getDatabase());
     get(child(dbRef, 'user/accuracy')).then((snapshot) => {
       if(snapshot.exists()) {
-        setDBAccuracy(snapshot.val());
+        DBAccuracy = snapshot.val();
+        console.log("HELLOOO " + DBAccuracy);
+        //setDBAccuracy(snapshot.val());
       } else {
         console.log("No data available");
       }
@@ -39,7 +48,9 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
 
     get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
       if(snapshot.exists()) {
-        setDBWords(snapshot.val());
+        DBWords = snapshot.val();
+        console.log("HELLOOO " + DBWords);
+        //setDBWords(snapshot.val());
       } else {
         console.log("No data available");
       }
@@ -48,7 +59,7 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
     });
   }
 
-  function writeToDb() {
+  function writeToDb(accuracy, wordsPerMin) {
     const db = getDatabase();
 
     set(ref(db, 'user/'), {
@@ -237,15 +248,27 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
             addToMap(wrongWordsMap);
             // put into database here
             readToDb();
-            let newAccuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
-            let newCorrectWords = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
-            setAccuracy(newAccuracy);
-            setWordsPerMin(newCorrectWords);
+            console.log("DBAccuracy  " + DBAccuracy);
+            console.log("DBWords  " + DBWords);
+            console.log("NUMDIFF  " + numDiff);
+            // console.log((Math.round(100 * (totalUserScore / totalPassageScore))));
+            // console.log(Math.round((60 / time) * correctWords));
+            // let newAccuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
+            // let newCorrectWords = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
+            //let newAccuracy = (Math.round(100 * (totalUserScore / totalPassageScore)));
+            //let newCorrectWords = (Math.round((60 / time) * correctWords));
+            // console.log("ACCURACY " + newAccuracy);
+            // console.log("WORDS " + newCorrectWords);
+            //setAccuracy(newAccuracy);
+            //setWordsPerMin(newCorrectWords);
+            accuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
+            wordsPerMin = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
+            console.log("ACCURACY" + accuracy);
+            console.log("WORDS " + wordsPerMin);
             // console.log("PUT INTO DATABASE");
-            // console.log("Accuracy" + accuracy);
-            // console.log("Correct Words per Min " + wordsPerMin);
-            writeToDb();
-
+            // console.log("Accuracy" + (Math.round(100 * (totalUserScore / totalPassageScore))));
+            // console.log("Correct Words per Min " + (Math.round((60 / time) * correctWords)));
+            writeToDb(accuracy, wordsPerMin);
           }
         }
 
