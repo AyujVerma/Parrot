@@ -9,7 +9,7 @@ const Home = () => {
 		const db = getDatabase();
 
 		set(ref(db, 'user/'), {
-		  test: text,
+		  test: text
 		});
 	}
 
