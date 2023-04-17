@@ -1,28 +1,44 @@
-import React, { useState } from "react";
-import Analytics_Reading from "./Analytics_Reading";
-import Analytics_Writing from "./Analytics_Writing";
+import { useState } from 'react';
+import PageOne from './Analytics_Reading';
+import PageTwo from './Analytics_Writing';
+import { createTheme, Switch, FormControlLabel, ThemeProvider, Typography } from "@material-ui/core";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#fae0a7",
+    },
+  },
+});
 
 function Analytics() {
-  const [page, setPage] = useState("Reading Analytics");
+  const [showPageOne, setShowPageOne] = useState(true);
 
-  const renderPage = () => {
-    switch (page) {
-      case "Reading Analytics":
-        return <Analytics_Reading  />;
-      case "Writing Analytics":
-        return <Analytics_Writing />;
-      default:
-        return <Analytics_Reading />;
-    }
+  const handleSwitchChange = () => {
+    setShowPageOne(!showPageOne);
   };
 
   return (
-    <div>
-      <div style={{}}>
-        <button onClick={() => setPage("Writing Analytics")}>Writing</button>
-      </div>
-      {renderPage()}
-    </div>
+    <ThemeProvider theme={theme}>
+      <FormControlLabel
+        style={{ marginLeft: "20px" }}
+        control={
+          <Switch
+            checked = {!showPageOne}
+            onChange = {handleSwitchChange}
+            color = "primary"
+            size = "large"
+          />
+        }
+        label={
+          <Typography style={{ fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif'" }}>
+            Writing
+          </Typography>
+        }
+        labelPlacement="end"
+      />
+      {showPageOne ? <PageOne /> : <PageTwo />}
+    </ThemeProvider>
   );
 }
 

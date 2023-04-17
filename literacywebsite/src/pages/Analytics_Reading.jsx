@@ -2,10 +2,10 @@ import React from "react";
 import { BarChart } from "../components/BarChart.js";
 import { LineChart } from "../components/LineChart.js";
 import { PieChart } from "../components/PieChart.js";
-import { UserData } from '../Data.js';
+import { UserData } from '../DataReading.js';
 import { useState } from 'react';
 import { Chart, Colors } from 'chart.js/auto';
-import Analytics_Writing from "./Analytics_Writing";
+
 Chart.register(Colors);
 function Analytics_Reading() {
     const [wordsData, setWordsData] = useState({
@@ -127,8 +127,8 @@ function Analytics_Reading() {
         datasets: [{
             data: [
                 sessionData.correctWordsPercentage,
+                sessionData.incorrectWordsPercentage,
                 sessionData.partialWordsPercentage,
-                sessionData.incorrectWordsPercentage
             ],
             backgroundColor: ['#9bd0c3', '#f6bbaa', '#fae0a7'],
             borderColor: 'black',
@@ -209,37 +209,21 @@ function Analytics_Reading() {
         },
     };
 
-    const [page, setPage] = useState("Reading Analytics");
-
-    const renderPage = () => {
-        switch (page) {
-            case "Reading Analytics":
-                return <Analytics_Reading />;
-            case "Writing Analytics":
-                return <Analytics_Writing />;
-            default:
-                return <Analytics_Reading />;
-        }
-    };
 
     return (
         <div>
-            <div style={{}}>
-                <button onClick={() => setPage("Writing Analytics")}>Writing</button>
-            </div>
-            {renderPage()}
             <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 75, borderRadius: 25, border: "2px solid #bebebe", marginTop: 20, marginBottom: 20, width: "50%", margin: "auto", backgroundColor: "#aecfcf" }}>
-                <span style={{ fontSize: 40, fontFamily: "avenir", fontWeight: "bold", color: "white" }}> Welcome Danny! </span>
+                <span style={{ fontSize: 40, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "white" }}> Welcome Danny! </span>
             </div>
             <div style={{ flex: 1, padding: 10, display: "flex", justifyContent: "space-between", marginTop: 20, marginBottom: 20, marginLeft: 10, marginRight: 10 }}>
                 <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#f6bbaa" }}>
-                    <span style={{ fontSize: 30, fontFamily: "avenir", fontWeight: "bold", color: "#EA2300" }}>Streak: 6 days! 🔥</span>
+                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#EA2300" }}>Streak: 6 days! 🔥</span>
                 </div>
                 <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#9bd0c3" }}>
-                    <span style={{ fontSize: 30, fontFamily: "avenir", fontWeight: "bold", color: "#00008B" }}>Books Read: 17! 📖</span>
+                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#00008B" }}>Books Read: 17! 📖</span>
                 </div>
                 <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#fae0a7" }}>
-                    <span style={{ fontSize: 30, fontFamily: "avenir", fontWeight: "bold", color: "#A17F1A" }}>Points Till Next Level: 72! 📈</span>
+                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#A17F1A" }}>Points Till Next Level: 7! 📈</span>
                 </div>
             </div>
             <div style={{ display: "flex", padding: 10, weight: "bold" }}>
