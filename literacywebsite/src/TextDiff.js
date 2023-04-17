@@ -27,14 +27,14 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
       totalUserScore += 0.5 * prevScore;
       prevScore = score;
       return {
-        backgroundColor: '#fedd70',
+        backgroundColor: 'rgb(250, 224, 167)',
       };
     }
     else {
       totalUserScore -= (1 / totalWordsPassage) * score;
       return {
-        backgroundColor: '#d4edda',
-        color: 'green',
+        backgroundColor: '#9bd0c3',
+        color: '#406c6c',
       };
     }
   }
@@ -50,7 +50,7 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: 'red',
+      color: 'rgb(242, 112, 75)',
       textDecoration: 'line-through',
     };
   }

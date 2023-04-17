@@ -11,8 +11,7 @@ import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import FlagIcon from '@mui/icons-material/Flag';
 
-const pigStory = "Red. green. Test. red. green. red. red.";
-//const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
+const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
 const chunks = pigStory.split(/(?<=[.?!])/);
 
 const Reading = () => {
@@ -20,7 +19,7 @@ const Reading = () => {
     const [correctText, setCorrectText] = useState('');
 
     const [index, setIndex] = useState(0);
-    const [outputText, setOutputText] = useState('Click the arrow to begin!');
+    const [outputText, setOutputText] = useState('Read the text out loud and click the arrow to begin!');
     const [time, setTime] = useState(0);
     const [running, setRunning] = useState(false);
     const [firstClick, completeFirstClick] = useState(true);
