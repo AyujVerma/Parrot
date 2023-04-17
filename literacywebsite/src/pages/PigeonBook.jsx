@@ -31,8 +31,10 @@ const Reading = () => {
     const [diffFlag, setDiffFlag] = useState(false);
     const [readingFlag, setReadingFlag] = useState(false);
     const memoizedElement = useMemo(() => {
-      return <Diff text1={correctText} text2={userText} wrongWordsMap={wrongWordsMap} addToMap={addToMap} secondClick={secondClick} time={time/1000}/>;
+      return <Diff text1={correctText} text2={userText} wrongWordsMap={wrongWordsMap} addToMap={addToMap} secondClick={secondClick} time={time/1000} numDiff={numDiff} setNumDiff={setNumDiff}/>;
     }, [diffFlag]);
+
+    const [numDiff, setNumDiff] = useState(0);
 
     useEffect(() => {
       let interval;

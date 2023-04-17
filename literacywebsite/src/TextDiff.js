@@ -3,7 +3,7 @@ import { diffWords } from 'diff';
 import map from './Map';
 import { getDatabase, set } from "firebase/database";
 
-function Diff({ text1, text2, addToMap, secondClick, time }) {
+function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }) {
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -31,16 +31,29 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
       if(snapshot.exists()) {
         setDBAccuracy(snapshot.val());
       } else {
-        console.log(No)
+        console.log("No data available");
       }
-    })
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
+      if(snapshot.exists()) {
+        setDBWords(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
   }
 
   function writeToDb() {
     const db = getDatabase();
 
     set(ref(db, 'user/'), {
-
+      accuracy: accuracy,
+      wordsPerMinute: wordsPerMin
     })
   }
 
@@ -220,14 +233,18 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
             totalUserScore = 0;
           }
           if (!secondClick) {
+            setNumDiff(numDiff + 1);
             addToMap(wrongWordsMap);
             // put into database here
-            setAccuracy(Math.round(100 * (totalUserScore / totalPassageScore)));
-            setWordsPerMin(Math.round((60 / time) * correctWords));
-            console.log("PUT INTO DATABASE");
-            console.log("Accuracy" + accuracy);
-            console.log("Correct Words per Min " + wordsPerMin);
-
+            readToDb();
+            let newAccuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
+            let newCorrectWords = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
+            setAccuracy(newAccuracy);
+            setWordsPerMin(newCorrectWords);
+            // console.log("PUT INTO DATABASE");
+            // console.log("Accuracy" + accuracy);
+            // console.log("Correct Words per Min " + wordsPerMin);
+            writeToDb();
 
           }
         }
