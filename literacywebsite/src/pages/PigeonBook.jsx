@@ -9,9 +9,9 @@ import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import RestartAltIcon from '@mui/icons-material/RestartAlt';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import FlagIcon from '@mui/icons-material/Flag';
+import { getDatabase, set, ref, child, get } from "firebase/database";
 
-const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree. After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
+const pigStory = "Once upon a time there lived a lion in a forest. One day after a heavy meal. It was sleeping under a tree.";// After a while, there came a mouse and it started to play on the lion. Suddenly the lion got up with anger and looked for those who disturbed its nice sleep. Then it saw a small mouse standing trembling with fear. The lion jumped on it and started to kill it. The mouse requested the lion to forgive it. The lion felt pity and left it. The mouse ran away. On another day, the lion was caught in a net by a hunter. The mouse came there and cut the net. Thus it escaped. There after, the mouse and the lion became friends. They lived happily in the forest afterwards.";
 const chunks = pigStory.split(/(?<=[.?!])/);
 
 const Reading = () => {
@@ -72,13 +72,64 @@ function undisableSubmit() {
   SpeechRecognition.stopListening();
 }
 
-function handleText() {
+var DBAccuracy = 0;
+var DBWords = 0;
+
+async function readToDb() {
+  const dbRef = ref(getDatabase());
+  await get(child(dbRef, 'user/accuracy')).then((snapshot) => {
+    if(snapshot.exists()) {
+      DBAccuracy = snapshot.val();
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
+  await get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
+    if(snapshot.exists()) {
+      DBWords = snapshot.val();
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+async function writeToDb(finalAccuracy, finalWordsPerMinute) {
+  const db = getDatabase();
+
+  await set(ref(db, 'user/'), {
+    accuracy: finalAccuracy,
+    wordsPerMinute: finalWordsPerMinute,
+  })
+}
+
+async function writeToDbWrongWords(wrongWordsMap) {
+
+  const db = getDatabase();
+
+  for (let [word, frequency] of wrongWordsMap) {
+    await set(ref(db, `user/wrongWordsMap/${word}`), frequency);
+  }
+}
+
+var finalAccuracy = 0;
+var finalWordsPerMinute = 0;
+
+async function handleText() {
   if (index < chunks.length) {
     setOutputText(chunks[index]);
   } else {
     setFinishedFlag(true);
     setOutputText('The End.');
-    console.log(wrongWordsMap);
+    await readToDb();
+    finalAccuracy = DBAccuracy / (numDiff - 1);
+    finalWordsPerMinute = DBWords / (numDiff - 1);
+    await writeToDb(finalAccuracy, finalWordsPerMinute);
+    await writeToDbWrongWords(wrongWordsMap);
   }
 }
 

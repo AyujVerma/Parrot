@@ -4,7 +4,6 @@ import map from './Map';
 import { getDatabase, set, ref, child, get } from "firebase/database";
 
 function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }) {
-  console.log("REFRESH DIFFFFFF");
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -30,14 +29,11 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
   var DBAccuracy = 0;
   var DBWords = 0;
 
-
-  function readToDb() {
-    console.log("CALL READ TO DB");
+  async function readToDb() {
     const dbRef = ref(getDatabase());
-    get(child(dbRef, 'user/accuracy')).then((snapshot) => {
+    await get(child(dbRef, 'user/accuracy')).then((snapshot) => {
       if(snapshot.exists()) {
         DBAccuracy = snapshot.val();
-        console.log("HELLOOO " + DBAccuracy);
         //setDBAccuracy(snapshot.val());
       } else {
         console.log("No data available");
@@ -46,10 +42,9 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
       console.error(error);
     });
 
-    get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
+    await get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
       if(snapshot.exists()) {
         DBWords = snapshot.val();
-        console.log("HELLOOO " + DBWords);
         //setDBWords(snapshot.val());
       } else {
         console.log("No data available");
@@ -59,10 +54,10 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
     });
   }
 
-  function writeToDb(accuracy, wordsPerMin) {
+  async function writeToDb(accuracy, wordsPerMin) {
     const db = getDatabase();
 
-    set(ref(db, 'user/'), {
+    await set(ref(db, 'user/'), {
       accuracy: accuracy,
       wordsPerMinute: wordsPerMin
     })
@@ -217,6 +212,15 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
     return string;
   }
 
+  async function updateDB() {
+    setNumDiff(numDiff + 1);
+    addToMap(wrongWordsMap);
+    await readToDb();
+    accuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore))));
+    wordsPerMin = (DBWords + (Math.round((60 / time) * correctWords)));
+    await writeToDb(accuracy, wordsPerMin);
+  }
+
   return (
     <div>
       {diffs.map((diff, i) => {
@@ -244,31 +248,7 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
             totalUserScore = 0;
           }
           if (!secondClick) {
-            setNumDiff(numDiff + 1);
-            addToMap(wrongWordsMap);
-            // put into database here
-            readToDb();
-            console.log("DBAccuracy  " + DBAccuracy);
-            console.log("DBWords  " + DBWords);
-            console.log("NUMDIFF  " + numDiff);
-            // console.log((Math.round(100 * (totalUserScore / totalPassageScore))));
-            // console.log(Math.round((60 / time) * correctWords));
-            // let newAccuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
-            // let newCorrectWords = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
-            //let newAccuracy = (Math.round(100 * (totalUserScore / totalPassageScore)));
-            //let newCorrectWords = (Math.round((60 / time) * correctWords));
-            // console.log("ACCURACY " + newAccuracy);
-            // console.log("WORDS " + newCorrectWords);
-            //setAccuracy(newAccuracy);
-            //setWordsPerMin(newCorrectWords);
-            accuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore)))) / numDiff;
-            wordsPerMin = (DBWords + (Math.round((60 / time) * correctWords))) / numDiff;
-            console.log("ACCURACY" + accuracy);
-            console.log("WORDS " + wordsPerMin);
-            // console.log("PUT INTO DATABASE");
-            // console.log("Accuracy" + (Math.round(100 * (totalUserScore / totalPassageScore))));
-            // console.log("Correct Words per Min " + (Math.round((60 / time) * correctWords)));
-            writeToDb(accuracy, wordsPerMin);
+            updateDB();
           }
         }
 
