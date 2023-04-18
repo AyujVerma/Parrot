@@ -168,7 +168,7 @@ function handleText() {
 
             <div className='submitButtons'> 
             <IconButton
-                onClick = {updateReadingPage} disabled={!disableSubmit}> {finishedFlag? "Finished" : readingFlag? "Submit" : <ArrowForwardIosIcon/>} </IconButton>
+                onClick = {updateReadingPage} disabled={!disableSubmit}> {finishedFlag? "Finished" : (readingFlag? "Submit" : <ArrowForwardIosIcon/>)} </IconButton>
             </div>
 
         </div>

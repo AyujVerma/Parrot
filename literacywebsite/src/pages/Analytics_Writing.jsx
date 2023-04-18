@@ -211,7 +211,7 @@ function Analytics_Writing() {
 
     return (
         <div>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 75, borderRadius: 25, border: "2px solid #bebebe", marginTop: 20, marginBottom: 20, width: "50%", margin: "auto", backgroundColor: "#aecfcf" }}>
+            {/* <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 75, borderRadius: 25, border: "2px solid #bebebe", marginTop: 20, marginBottom: 20, width: "50%", margin: "auto", backgroundColor: "#aecfcf" }}>
                 <span style={{ fontSize: 40, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "white" }}> Welcome Danny! </span>
             </div>
             <div style={{ flex: 1, padding: 10, display: "flex", justifyContent: "space-between", marginTop: 20, marginBottom: 20, marginLeft: 10, marginRight: 10 }}>
@@ -224,7 +224,7 @@ function Analytics_Writing() {
                 <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#fae0a7" }}>
                     <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#A17F1A" }}>Points Till Next Level: 7! 📈</span>
                 </div>
-            </div>
+            </div> */}
             <div style={{ display: "flex", padding: 10, weight: "bold" }}>
                 <div style={{ flex: "1", paddingLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
                     <BarChart chartData={wordsData} options={optionsWords}></BarChart>
