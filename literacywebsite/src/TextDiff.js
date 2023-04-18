@@ -1,8 +1,9 @@
 import { React, memo, useState } from "react";
 import { diffWords } from 'diff';
 import map from './Map';
+import { getDatabase, set, ref, child, get } from "firebase/database";
 
-function Diff({ text1, text2, addToMap, secondClick, time }) {
+function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }) {
   const options = { ignoreCase: true };
   const diffs = diffWords(text1, text2, options);
   let totalPassageScore = 0;
@@ -17,8 +18,50 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
   let sortedWrongWordsArray;
   let sortedWrongWordsString;
   let wrongWordsMap = new Map();
-  const [accuracy, setAccuracy] = new useState(0);
-  const [wordsPerMin, setWordsPerMin] = new useState(0);
+
+  // const [accuracy, setAccuracy] = useState(0);
+  // const [DBAccuracy, setDBAccuracy] = useState(0);
+  // const [wordsPerMin, setWordsPerMin] = useState(0);
+  // const [DBWords, setDBWords] = useState(0);
+
+  var accuracy = 0;
+  var wordsPerMin = 0;
+  var DBAccuracy = 0;
+  var DBWords = 0;
+
+  async function readToDb() {
+    const dbRef = ref(getDatabase());
+    await get(child(dbRef, 'user/accuracy')).then((snapshot) => {
+      if(snapshot.exists()) {
+        DBAccuracy = snapshot.val();
+        //setDBAccuracy(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+    await get(child(dbRef, 'user/wordsPerMinute')).then((snapshot) => {
+      if(snapshot.exists()) {
+        DBWords = snapshot.val();
+        //setDBWords(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+
+  async function writeToDb(accuracy, wordsPerMin) {
+    const db = getDatabase();
+
+    await set(ref(db, 'user/'), {
+      accuracy: accuracy,
+      wordsPerMinute: wordsPerMin
+    })
+  }
 
   /*
       Added words styling and scores.
@@ -52,7 +95,7 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: 'rgb(242, 112, 75)',
+      color: "#F6BBA",
       textDecoration: 'line-through',
     };
   }
@@ -169,6 +212,15 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
     return string;
   }
 
+  async function updateDB() {
+    setNumDiff(numDiff + 1);
+    addToMap(wrongWordsMap);
+    await readToDb();
+    accuracy = (DBAccuracy + (Math.round(100 * (totalUserScore / totalPassageScore))));
+    wordsPerMin = (DBWords + (Math.round((60 / time) * correctWords)));
+    await writeToDb(accuracy, wordsPerMin);
+  }
+
   return (
     <div>
       {diffs.map((diff, i) => {
@@ -196,11 +248,7 @@ function Diff({ text1, text2, addToMap, secondClick, time }) {
             totalUserScore = 0;
           }
           if (!secondClick) {
-            addToMap(wrongWordsMap);
-            // put into database here
-            console.log("PUT INTO DATABASE");
-            setAccuracy(Math.round(100 * (totalUserScore / totalPassageScore)));
-            setWordsPerMin(Math.round((60 / time) * correctWords));
+            updateDB();
           }
         }
 
