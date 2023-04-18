@@ -17,7 +17,11 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import PopupState, { bindTrigger, bindMenu } from 'material-ui-popup-state';
 import PlayCircleFilledWhiteIcon from '@mui/icons-material/PlayCircleFilledWhite';
+
 const PeppaPigVideo = () => {
+  const [correcttext, setcorrecttext] = useState("");
+  const [usertext, setusertext] = useState("");
+
   const pageHeader = () => {
     return (
       <div>
@@ -113,16 +117,82 @@ const PeppaPigVideo = () => {
 </div>
     )
   }
+
+  const WritingBox = () => {
+    const chunks = ["It is tea time, and mummy pig has a surprise for everyone.", "Today is a day for pancakes.", "Pancakes. Delicious."];
+    const [index, setIndex] = useState(0);
+    const [text, setText] = useState('');
+    const [correctText, setCorrectText] = useState(chunks[index]);
+    const [userText, setUserText] = useState(text);
+    function onSubmit(event) {
+      event.preventDefault();
+      console.log(text);
+      setText('');
+      setusertext(text);
+      setIndex(index => index + 1);
+      setcorrecttext(chunks[index]);
+    }
+    return (
+      <div>
+      <div className="textbox" style={{ display: 'flex', flexDirection:'column', alignItems: 'center'}}>
+        <TextField
+          id="outlined-multiline-flexible"
+          multiline
+          maxRows={4} fullWidth size="large"
+          placeholder="Listen to the video and type what you hear!"
+          rows={17}
+          value={text}
+          onInput={(e) => {setText(e.target.value)}}
+          sx={{
+            '.MuiInputBase-input': { fontSize: '1.5rem' },
+          }}
+        />
+        <div  classname="textboxbutton">
+        <button onClick={onSubmit} style={{ marginTop: '10%' , backgroundColor: '#f6bbaa'}}>
+              Submit
+            </button>
+        </div>
+      </div>
+
+      <style>
+            {`
+            button {
+              background-color: #9BD0C3;
+              color: white;
+              border: none;
+              border: 2px solid #2f2f2f;
+              border-radius: 4px;
+              width: 130px;
+              height: 40px;
+              outlineColor: 'black';
+            }
+            `}
+          </style>
+
+      </div>
+
+      
+    );
+  }
+  
+  const ResultBox = () => {
+    return (
+      <div className="bottomsection"><div className='resultbox'><Diff text1={correcttext} text2={usertext} /> </div> </div>
+    );
+  }
+
   return (
     <div>
       {pageHeader()}
     <Box className="page">
-      <div className="video"><Video/></div>
-      <div className="writing"><WritingBox/></div>
+      <div className="video">{Video()}</div>
+      <div className="writing">{WritingBox()}</div>
     </Box>
+      <ResultBox/>
     </div>
   )
 }
+
 const Video = () => {
   const vidList = [
     {
@@ -173,40 +243,4 @@ const Video = () => {
     </div>
   );
 };
-const WritingBox = () => {
-  const chunks = ["It is tea time, and mummy pig has a surprise for everyone.", "Today is a day for pancakes.", "Pancakes. Delicious."];
-  const [index, setIndex] = useState(0);
-  const [text, setText] = useState('');
-  const [correctText, setCorrectText] = useState(chunks[index]);
-  const [userText, setUserText] = useState(text);
-  function onSubmit(event) {
-    event.preventDefault();
-    console.log(text);
-    setText('');
-    setUserText(text);
-    setIndex(index => index + 1);
-    setCorrectText(chunks[index]);
-  }
-  return (
-    <Box component="form" onSubmit={onSubmit}>
-    <br></br>
-    <br></br>
-      <TextField
-        id="outlined-multiline-flexible"
-        multiline
-        maxRows={4} fullWidth size="large"
-        placeholder="Listen to the video and type what you hear!"
-        variant="filled"
-        rows={20}
-        value={text}
-        onInput={(e) => {setText(e.target.value)}}
-        sx={{
-          '.MuiInputBase-input': { fontSize: '1.5rem' },
-        }}
-      />
-      <Button type="submit">Submit</Button>
-      <div className='resultBox'> <Diff text1={correctText} text2={userText} /> </div>
-    </Box>
-  );
-}
 export default PeppaPigVideo;

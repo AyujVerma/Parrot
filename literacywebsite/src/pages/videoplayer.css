@@ -51,4 +51,28 @@
     width: 15%;
   }
 
+  .resultbox {
+    border: 2px solid #747474;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-radius: 25px !important;
+    border: 2px solid #2f2f2f !important;
+  }
   
+.textbox {
+  margin-top: 15%;
+}
+
+.bottomsection {
+  padding-bottom: 3%;
+}

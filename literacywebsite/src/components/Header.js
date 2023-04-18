@@ -79,7 +79,7 @@ class Header extends Component {
             <h3 style={{fontSize: '35px'}}>Why Parrot?</h3>
             <p style={{fontSize: '20px', paddingTop: '20px'}}>Who said reading had to be boring? Parrot combines popular video and text content with data analytics to create fun, interactive lessons on reading and writing for kids 5-10. </p>
             {/* <Button variant="contained" sx={{backgroundColor: '#f6bbaa', boxShadow: "none", outlineColor: '#2f2f2f', '&:hover': { backgroundColor: '#f6bbaa', boxShadow: "none" }}}>Learn More</Button> */}
-            <button style={{ marginTop: 20 , backgroundColor: '#f6bbaa'}}>
+            <button style={{ marginTop: '2%' , backgroundColor: '#f6bbaa'}}>
               Learn More
             </button>
           </div>
