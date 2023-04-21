@@ -23,14 +23,14 @@ function WritingDiff({ text1, text2 }) {
       totalUserScore += 0.5 * prevScore;
       prevScore = score;
       return {
-        backgroundColor: '#fedd70',
+        backgroundColor: 'rgb(250, 224, 167)',
       };
     }
     else {
       totalUserScore -= (1 / totalWordsPassage) * score;
       return {
-        backgroundColor: '#d4edda',
-        color: 'green',
+        backgroundColor: '#9bd0c3',
+        color: '#406c6c',
       };
     }
   }
@@ -46,7 +46,7 @@ function WritingDiff({ text1, text2 }) {
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: 'red',
+      color: 'rgb(242, 112, 75)',
       textDecoration: 'line-through',
     };
   }

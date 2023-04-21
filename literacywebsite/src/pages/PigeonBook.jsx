@@ -19,7 +19,7 @@ const Reading = () => {
     const [correctText, setCorrectText] = useState('');
 
     const [index, setIndex] = useState(0);
-    const [outputText, setOutputText] = useState('Click the arrow to begin!');
+    const [outputText, setOutputText] = useState('Read the text out loud and click the arrow to begin!');
     const [time, setTime] = useState(0);
     const [running, setRunning] = useState(false);
     const [firstClick, completeFirstClick] = useState(true);
