@@ -95,7 +95,7 @@ function Diff({ text1, text2, addToMap, secondClick, time, numDiff, setNumDiff }
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: "#F6BBA",
+      color: 'rgb(242, 112, 75)',
       textDecoration: 'line-through',
     };
   }
