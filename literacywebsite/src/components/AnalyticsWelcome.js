@@ -1,9 +1,14 @@
 import React from "react";
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import GradeIcon from '@mui/icons-material/Grade';
+import fire from '../images/fire.png';
+import book from '../images/bookicon.png';
+import coin from '../images/coin.png';
 
-const AnalyticsWelcome = () => {
+const AnalyticsWelcome = (props) => {
+const streak = props.streak;
+const num= props.num; 
+const content= props.content;
+const verb= props.verb;
+const points = props.points;
     return (
         
 <div>
@@ -21,42 +26,28 @@ const AnalyticsWelcome = () => {
         display: "flex", 
         flexDirection: "column", 
         justifyContent: "center", 
-        alignItems: "center", 
-        color: "#5b5b5b", 
-        height: 100, 
-        borderRadius: 25, 
-        border: "2px solid #2f2f2f", 
-        backgroundColor: "#f6bbaa" }}>
-          <LocalFireDepartmentIcon style={{fontSize: 40}}/>
-          <span style={{ fontSize: 24, marginTop: 10 }}>6 Day Streak!</span>
+        alignItems: "center", opacity: 0, animation: 'fadeIn 1s ease-in-out 0.3s forwards'}}>
+          <img src={fire} style={{width: '100px', height: '100px'}}/>
+          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{streak}</div>
+          <span style={{ fontSize: 25, fontWeight: "2px"}}>DAY STREAK </span>
       </div>
-      <div style={{ 
-        width: "30%", 
+      <div style={{ width: "30%", 
         display: "flex", 
         flexDirection: "column", 
         justifyContent: "center", 
-        alignItems: "center", 
-        color: "#5b5b5b", 
-        height: 100, 
-        borderRadius: 25, 
-        border: "2px solid #2f2f2f", 
-        backgroundColor: "#9bd0c3" }}>
-          <EmojiEventsIcon style={{fontSize: 40}}/>
-          <span style={{ fontSize: 24, marginTop: 10 }}>17 Books Read!</span>
+        alignItems: "center", opacity: 0, animation: 'fadeIn 1s ease-in-out 0.5s forwards'}}>
+          <img src={book} style={{width: '100px', height: '100px'}}/>
+          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{num}</div>
+          <span style={{ fontSize: 25, fontWeight: "2px"}}>{content} {verb} </span>
       </div>
-      <div style={{ 
-        width: "30%", 
+      <div style={{ width: "30%", 
         display: "flex", 
         flexDirection: "column", 
         justifyContent: "center", 
-        alignItems: "center", 
-        color: "#5b5b5b", 
-        height: 100, 
-        borderRadius: 25, 
-        border: "2px solid #2f2f2f", 
-        backgroundColor: 'rgb(250, 224, 167)' }}>
-          <GradeIcon style={{fontSize: 40}}/>
-          <span style={{ fontSize: 24, marginTop: 10 }}>7 Points till next level!</span>
+        alignItems: "center", opacity: 0, animation: 'fadeIn 1s ease-in-out 0.7s forwards'}}>
+          <img src={coin} style={{width: '100px', height: '100px'}}/>
+          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{points}</div>
+          <span style={{ fontSize: 25, fontWeight: "2px"}}> POINTS UNTIL NEXT LEVEL </span>
       </div>
   </div>
 </div>

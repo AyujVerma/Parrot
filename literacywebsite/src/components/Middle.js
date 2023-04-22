@@ -20,7 +20,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
@@ -55,7 +55,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
@@ -91,7 +91,7 @@ function Card1({ frontText, backText }) {
     const handleScroll = () => {
         const scrollY = window.scrollY;
         if (scrollY > 500) {
-          setTimeout(() => setIsFlipped(true), 3500); // delay for 5 seconds before flipping
+          setTimeout(() => setIsFlipped(true), 2000); // delay for 5 seconds before flipping
         } else {
           setIsFlipped(false);
         }
