@@ -1,0 +1,38 @@
+.mission {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .mission-text {
+    /* z-index: 1; */
+    text-align: center;
+    color: white;
+    margin-left: 5%;
+    /* padding-right: 30%; */
+    /* font-family: 'Didot, serif'; */
+  }
+  
+  .mission-text h1 {
+    text-align: left;
+    font-size: 80px;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    color: #406c6c;
+  }
+
+
+  
+  .mission-text p {
+    font-size: 28px;
+  }
+
+  .mission img {
+    padding-left: 10%;
+    margin-right: 5%;
+  }
+  

@@ -1,0 +1,66 @@
+
+.readingBox {
+    border: 2px solid #747474;
+    background-color: #d3e6e6;
+    color: rgb(69, 69, 69);
+    border-radius: 25px;
+    margin-top: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+}
+
+.speakingBox {
+    border: 2px solid #747474;
+    background-color: #d3e6e6;
+    color: rgb(69, 69, 69);
+    border-radius: 25px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+}
+
+.resultBox {
+    border: 2px solid #747474;
+    background-color: #e7e7e7;
+    border-radius: 25px;
+    margin-top: 2%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+}
+
+.microphoneButtons {
+    display: flex;
+    flex-direction: row;
+    float: left;
+}
+
+.submitButtons {
+    display: flex;
+    flex-direction: row;
+    float: right;
+}
+
+.reading-page {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-bottom: 3%;
+}
+
+/* .reading_page .banner {
+    border-radius: 25px;
+    border: 2px solid #747474;
+} */
+
+.banner img{
+    /* border-radius: 25px; */
+    margin: 0 !important;
+    width: 100%;
+}

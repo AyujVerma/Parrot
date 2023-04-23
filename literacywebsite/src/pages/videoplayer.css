@@ -1,0 +1,78 @@
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+}
+
+.video {
+    width: 70%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.writing {
+    width: 25%;
+    margin-right: 0;
+    padding-right: 0%;
+}
+
+.videoPageHeader {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #bbdbdb;
+}
+
+.button-group button:hover {
+    box-shadow: none;
+    color: #221b19;
+  }
+
+  .middlesection {
+    padding-top: 1%;
+    padding-bottom: 2%;
+    text-align: center;
+    background-color: #e7e7e7;
+  }
+
+  .button-group {
+    width: 100%;
+  }
+
+  .button-group Button {
+    margin-right: 10px;
+    margin-left: 10px;
+    width: 15%;
+  }
+
+  .resultbox {
+    border: 2px solid #747474;
+    border-radius: 25px;
+    margin-top: 2%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 1.5rem;
+  }
+
+  .MuiOutlinedInput-notchedOutline {
+    border-radius: 25px !important;
+    border: 2px solid #2f2f2f !important;
+  }
+  
+.textbox {
+  margin-top: 15%;
+}
+
+.bottomsection {
+  padding-bottom: 3%;
+}
