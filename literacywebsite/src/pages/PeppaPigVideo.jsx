@@ -26,8 +26,8 @@ const PeppaPigVideo = () => {
     return (
       <div>
       <Box className="videoPageHeader">
-        <h1>Peppa Pig Reading</h1>
-        <p> Test your skills! Idk what else to write here but yes add stuff!!</p>
+        <h1>Now Watching: Peppa Pig</h1>
+        <p> Click on the arrow to begin! </p>
       </Box>
       <div class="middlesection">
   <br></br>
