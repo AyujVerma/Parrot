@@ -5,6 +5,7 @@ import { PieChart } from "../components/PieChart.js";
 import { UserData } from '../DataWriting.js';
 import { useState } from 'react';
 import { Chart, Colors } from 'chart.js/auto';
+import AnalyticsWelcome from '../components/AnalyticsWelcome';
 
 Chart.register(Colors);
 function Analytics_Writing() {
@@ -211,34 +212,21 @@ function Analytics_Writing() {
 
     return (
         <div>
-            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 75, borderRadius: 25, border: "2px solid #bebebe", marginTop: 20, marginBottom: 20, width: "50%", margin: "auto", backgroundColor: "#aecfcf" }}>
-                <span style={{ fontSize: 40, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "white" }}> Welcome Danny! </span>
-            </div>
-            <div style={{ flex: 1, padding: 10, display: "flex", justifyContent: "space-between", marginTop: 20, marginBottom: 20, marginLeft: 10, marginRight: 10 }}>
-                <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#f6bbaa" }}>
-                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#EA2300" }}>Streak: 6 days! 🔥</span>
+            <AnalyticsWelcome streak="15" num="7" content="VIDEOS" verb="WATCHED" points="60"/>
+            <div style={{ display: "flex", padding: 10 }}>
+                <div style={{ flex: "1", marginLeft: "3%", paddingLeft: "3%", paddingRight: "3%", paddingTop: "3%", height: "400px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
+                <BarChart chartData={wordsData} options={optionsWords}></BarChart>
                 </div>
-                <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#9bd0c3" }}>
-                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#00008B" }}>Videos Watched: 17! 📖</span>
-                </div>
-                <div style={{ width: "30%", display: "flex", justifyContent: "center", alignItems: "center", color: "black", height: 100, borderRadius: 25, border: "2px solid #bebebe", backgroundColor: "#fae0a7" }}>
-                    <span style={{ fontSize: 30, fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif", fontWeight: "bold", color: "#A17F1A" }}>Points Till Next Level: 7! 📈</span>
-                </div>
-            </div>
-            <div style={{ display: "flex", padding: 10, weight: "bold" }}>
-                <div style={{ flex: "1", paddingLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
-                    <BarChart chartData={wordsData} options={optionsWords}></BarChart>
-                </div>
-                <div style={{ flex: "1", marginLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
-                    <LineChart chartData={correctWordsPerMinuteData} options={optionsCorrectWordsPerMinute}></LineChart>
+                <div style={{ flex: "1", marginLeft: "3%", marginRight: "3%", paddingLeft: "3%", paddingRight: "3%", paddingTop: "3%", height: "400px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
+                <LineChart chartData={correctWordsPerMinuteData} options={optionsCorrectWordsPerMinute}></LineChart>
                 </div>
             </div>
             <div style={{ display: "flex", padding: 10 }}>
-                <div style={{ flex: "2", paddingLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
-                    <PieChart chartData={wordPercentagesData} options={optionsWordPercentages}></PieChart>
+                <div style={{ flex: "1", marginLeft: "3%", marginTop: "2%", marginBottom: "2%", paddingLeft: "3%", paddingRight: "3%", paddingTop: "3%", paddingBottom: "3%", width: "30%", height: "400px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
+                <PieChart chartData={wordPercentagesData} options={optionsWordPercentages}></PieChart>
                 </div>
-                <div style={{ flex: "2", marginLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
-                    <BarChart chartData={wrongWordsData} options={optionsWrongWords}></BarChart>
+                <div style={{ flex: "1", marginLeft: "3%", marginRight: "3%", marginTop: "2%", paddingLeft: "3%", paddingRight: "3%", paddingTop: "3%", marginBottom: "2%", height: "400px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
+                <BarChart chartData={wrongWordsData} options={optionsWrongWords}></BarChart>
                 </div>
             </div>
         </div>

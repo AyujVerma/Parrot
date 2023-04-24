@@ -2,6 +2,8 @@ import { useState, useEffect, useLayoutEffect } from 'react';
 import PageOne from './Analytics_Reading';
 import PageTwo from './Analytics_Writing';
 import { createTheme, Switch, FormControlLabel, ThemeProvider, Typography } from "@material-ui/core";
+import { fontSize } from '@mui/system';
+import danny from "../images/danny.png"
 import { getDatabase, set, ref, child, get } from "firebase/database";
 
 const theme = createTheme({
@@ -66,28 +68,47 @@ async function readToDb() {
     setShowPageOne(!showPageOne);
   };
 
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+      const fullText = "Welcome, Danny Perille";
+      let i = 0;
+      const intervalId = setInterval(() => {
+        setDisplayText(fullText.slice(0, i));
+        i++;
+        if (i > fullText.length) {
+          clearInterval(intervalId);
+        }
+      }, 100);
+    }, []);
+
+
   return (
-    <ThemeProvider theme={theme}>
-      <FormControlLabel
-        style={{ marginLeft: "20px" }}
-        control={
-          <Switch
-            checked = {!showPageOne}
-            onChange = {handleSwitchChange}
-            color = "primary"
-            size = "large"
-          />
-        }
-        label={
-          <Typography style={{ fontFamily: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif'" }}>
-            Writing
-          </Typography>
-        }
-        labelPlacement="end"
-      />
-      {(typeof DBAccuracy != "undefined") && (typeof DBWords != "undefined") && (typeof mostMissed != "undefined") && showPageOne ? <PageOne DBAccuracy={DBAccuracy} DBWords={DBWords} mostMissed={mostMissed}/> : <PageTwo />}
+    <div>
+      <div className="top-section">
+        <img src={danny} style={{ width: "150px", height: "150px"}}/>
+        <h1> {displayText} </h1>
+        <FormControlLabel
+      style={{ marginLeft: "20px" }}
+      control={
+        <Switch
+          checked = {!showPageOne}
+          onChange = {handleSwitchChange}
+          color = "primary"
+          size = "large"
+        />
+      }
+      label={
+        <Typography variant="h5">
+          {showPageOne ? "Reading" : "Writing"}
+        </Typography>
+      }
+      labelPlacement="end"
+    />
+      </div>
+    {(typeof DBAccuracy != "undefined") && (typeof DBWords != "undefined") && (typeof mostMissed != "undefined") && showPageOne ? <PageOne DBAccuracy={DBAccuracy} DBWords={DBWords} mostMissed={mostMissed}/> : <PageTwo />}
       {/* <PageOne DBAccuracy={DBAccuracy} DBWords={DBWords} mostMissed={mostMissed}/> */}
-    </ThemeProvider>
+    </div>
   );
 }
 
