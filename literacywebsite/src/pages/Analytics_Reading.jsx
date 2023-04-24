@@ -58,6 +58,7 @@ function Analytics_Reading({ DBAccuracy, DBWords, mostMissed}) {
             {
                 label: "Accuracy",
                 data: UserData.map((data) => data.accuracy),
+                pointRadius: 5,
                 backgroundColor: "#9bd0c3",
                 borderColor: "black",
                 borderWidth: 2,
