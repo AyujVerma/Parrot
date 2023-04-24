@@ -44,7 +44,7 @@ const Mission = () => {
         <div className="mission-text">
           <h1>Parrot's Mission</h1>
           <p>
-          Parrot integrates modern <span style={{color: '#406c6c'}}>streaming</span> and <span style={{color: '#406c6c'}}>e-reading</span> with education to create content for kids to learn using their favorite videos and books. <span style={{fontsize: '60px', color: '#406c6c'}}>It’s learning, the fun way.</span>
+          Parrot integrates modern <span style={{color: '#406c6c'}}>streaming</span> and <span style={{color: '#406c6c'}}>e-reading</span> with education to create content for kids to learn using their favorite videos and books. <span style={{fontsize: '60px', color: '#406c6c'}}>Where learning takes flight.</span>
           </p>
         </div>
         {/* this is the right side image */}
