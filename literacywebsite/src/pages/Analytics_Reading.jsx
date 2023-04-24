@@ -1,27 +1,63 @@
-import React from "react";
+import { React, useState, useEffect } from "react";
 import { BarChart } from "../components/BarChart.js";
 import { LineChart } from "../components/LineChart.js";
 import { PieChart } from "../components/PieChart.js";
 import { UserData } from '../DataReading.js';
-import { useState } from 'react';
 import { Chart, Colors } from 'chart.js/auto';
 
 Chart.register(Colors);
-function Analytics_Reading() {
-    const [wordsData, setWordsData] = useState({
+function Analytics_Reading({ DBAccuracy, DBWords, mostMissed}) {
+    useEffect(() => {
+        if ((DBAccuracy != 0) || (DBWords != 0) || (Object.keys(mostMissed).length != 0)) {
+                setAccuracy(prevState => {
+                    {
+                        const updatedDatasets = prevState.datasets.map(dataset => {
+                            if (dataset.label === "Accuracy") {
+                                return {
+                                    ...dataset,
+                                    data: [...dataset.data, DBAccuracy]
+                                };
+                            }
+                            return dataset;
+                        });
+                        return {
+                            ...prevState,
+                            datasets: updatedDatasets,
+                            labels: [...prevState.labels, prevState.datasets[0].data.length + 1]
+                        };
+                    }
+                })
+    
+                setcorrectWordsPerMinuteData(prevState => {
+                    {
+                        const updatedDatasets = prevState.datasets.map(dataset => {
+                            if (dataset.label === "Correct Words Per Minute") {
+                                return {
+                                    ...dataset,
+                                    data: [...dataset.data, DBWords]
+                                };
+                            }
+                            return dataset;
+                        });
+                        return {
+                            ...prevState,
+                            datasets: updatedDatasets,
+                            labels: [...prevState.labels, prevState.datasets[0].data.length + 1]
+                        };
+                    }
+                })
+        }
+
+    }, [DBAccuracy, DBWords]);
+    
+
+    const [accuracy, setAccuracy] = useState({
         labels: UserData.map((data) => data.session),
         datasets: [
             {
-                label: "Correct Words",
-                data: UserData.map((data) => data.correctWords),
+                label: "Accuracy",
+                data: UserData.map((data) => data.accuracy),
                 backgroundColor: "#9bd0c3",
-                borderColor: "black",
-                borderWidth: 2,
-            },
-            {
-                label: "Wrong Words",
-                data: UserData.map((data) => data.wrongWords),
-                backgroundColor: "#f6bbaa",
                 borderColor: "black",
                 borderWidth: 2,
             }
@@ -43,7 +79,7 @@ function Analytics_Reading() {
             y: {
                 title: {
                     display: true,
-                    text: "Frequency",
+                    text: "Accuracy %",
                     font: {
                         size: 16,
                     },
@@ -58,7 +94,7 @@ function Analytics_Reading() {
             },
             title: {
                 display: true,
-                text: "Correct and Wrong Words Per Session",
+                text: "Accuracy",
                 font: {
                     size: 20,
                     weight: "bold",
@@ -120,7 +156,9 @@ function Analytics_Reading() {
         },
     };
 
-    const sessionData = UserData.find(data => data.id === "If You Give a Mouse a Cookie");
+    const sessionData = UserData.find(data => data.session === 3);
+
+    addingToMap();
 
     const wordPercentagesData = {
         labels: ['Correct Words', 'Incorrect Words', 'Partial Words'],
@@ -155,6 +193,18 @@ function Analytics_Reading() {
             }
         },
     };
+
+    function addingToMap() {
+        Object.keys(mostMissed).map((word) => {
+            let frequency = mostMissed[word];
+
+            if (sessionData.wrongWordsMap.has(word)) {
+                sessionData.wrongWordsMap.set(word, sessionData.wrongWordsMap.get(word) + frequency);
+            } else {
+                sessionData.wrongWordsMap.set(word, frequency);
+            }
+        })
+    }
 
     const [wrongWordsData, setWrongWordsData] = useState({
         labels: Array.from(sessionData.wrongWordsMap.keys()),
@@ -228,7 +278,7 @@ function Analytics_Reading() {
             </div>
             <div style={{ display: "flex", padding: 10, weight: "bold" }}>
                 <div style={{ flex: "1", paddingLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
-                    <BarChart chartData={wordsData} options={optionsWords}></BarChart>
+                    <LineChart chartData={accuracy} options={optionsWords}></LineChart>
                 </div>
                 <div style={{ flex: "1", marginLeft: "10px", width: "45%", paddingRight: "10px", backgroundColor: 'white', borderRadius: 25, border: '2px solid #bebebe' }}>
                     <LineChart chartData={correctWordsPerMinuteData} options={optionsCorrectWordsPerMinute}></LineChart>

@@ -78,7 +78,7 @@ export const UserData = [
     {
         id: "Peppa Pig",
         session: 6,
-        accuracy: 120,
+        accuracy: 100,
         cwpm: 42,
         correctWords: 19,
         wrongWords: 3,
