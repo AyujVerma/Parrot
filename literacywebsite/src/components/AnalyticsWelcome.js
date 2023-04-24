@@ -28,7 +28,7 @@ const points = props.points;
         justifyContent: "center", 
         alignItems: "center"}}>
           <img src={fire} style={{width: '100px', height: '100px'}}/>
-          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{streak}</div>
+          <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{streak}</div>
           <span style={{ fontSize: 25, fontWeight: "2px"}}>DAY STREAK </span>
       </div>
       <div style={{ width: "30%", 
@@ -37,7 +37,7 @@ const points = props.points;
         justifyContent: "center", 
         alignItems: "center"}}>
           <img src={book} style={{width: '100px', height: '100px'}}/>
-          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{num}</div>
+          <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{num}</div>
           <span style={{ fontSize: 25, fontWeight: "2px"}}>{content} {verb} </span>
       </div>
       <div style={{ width: "30%", 
@@ -46,7 +46,7 @@ const points = props.points;
         justifyContent: "center", 
         alignItems: "center"}}>
           <img src={coin} style={{width: '100px', height: '100px'}}/>
-          <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{points}</div>
+          <div style={{display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontWeight: "3px" }}>{points}</div>
           <span style={{ fontSize: 25, fontWeight: "2px"}}> POINTS UNTIL NEXT LEVEL </span>
       </div>
   </div>
