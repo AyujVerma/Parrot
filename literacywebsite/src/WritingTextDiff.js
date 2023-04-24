@@ -46,7 +46,7 @@ function WritingDiff({ text1, text2 }) {
     //addWrongWordMap(diff);
     return {
       //backgroundColor: '#f8d7da',
-      color: '#F6BBA',
+      color: 'rgb(242, 112, 75)',
       textDecoration: 'line-through',
     };
   }
