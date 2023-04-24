@@ -109,12 +109,21 @@ async function writeToDb(finalAccuracy, finalWordsPerMinute) {
 }
 
 async function writeToDbWrongWords(wrongWordsMap) {
-
   const db = getDatabase();
 
   for (let [word, frequency] of wrongWordsMap) {
     await set(ref(db, `user/wrongWordsMap/${word}`), frequency);
   }
+}
+
+async function clearDB() {
+  const db = getDatabase();
+
+  await set(ref(db, 'user/'), {
+    accuracy: 0,
+    wordsPerMinute: 0,
+    wrongWordsMap: null
+  })
 }
 
 var finalAccuracy = 0;
@@ -155,6 +164,11 @@ async function handleText() {
       setMic(!micOn);
     }
 
+    async function handleFirstClick() {
+      completeFirstClick(false);
+      await clearDB();
+    }
+
     function updateReadingPage() {
         if (finishedFlag) {
           undisableSubmit();
@@ -166,7 +180,9 @@ async function handleText() {
           completeSecondClick(false);
         }
 
-        completeFirstClick(false);
+        if (firstClick) {
+          handleFirstClick();
+        }
 
         // analyze user text
         setCorrectText(outputText.replace(/[^\w\s\']|_/g, "").trim());
